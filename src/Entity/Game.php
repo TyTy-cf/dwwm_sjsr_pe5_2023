@@ -16,9 +16,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'groups' => 'games:list'
             ]
         ],
-        'post'
     ],
-    itemOperations: ['get'],
+    itemOperations: [],
 )]
 class Game
 {
