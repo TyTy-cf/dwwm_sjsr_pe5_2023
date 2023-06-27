@@ -2,22 +2,38 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'games:list'
+            ]
+        ],
+        'post'
+    ],
+    itemOperations: ['get'],
+)]
 class Game
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('games:list')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('games:list')]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups('games:list')]
     private ?float $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -27,9 +43,11 @@ class Game
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('games:list')]
     private ?string $thumbnailCover = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('games:list')]
     private ?string $slug = null;
 
     public function getId(): ?int
