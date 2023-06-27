@@ -49,8 +49,8 @@ App\Entity\Country:
     nationality: 'Néo zélandais'
     code: 'nz'
 
-App\Entity\Account:
-  account_{0..1399}:
+App\Entity\User:
+  user_{0..1399}:
     name (unique): <userName()>
     email (unique): <email()>
     nickname: <userName()>
@@ -194,7 +194,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_1'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/928-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/thumb/clearlogo/928.png'
   games_1:
     name: 'World of Warcraft'
     publishedAt: <dateTimeBetween('2004-01-01', '2004-12-31')>
@@ -204,7 +203,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/149-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/149.png'
   games_2:
     name: 'Overwatch'
     publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
@@ -214,7 +212,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/32185-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/32185.png'
   games_3:
     name: 'Starcraft'
     publishedAt: <dateTimeBetween('1998-01-01', '1998-12-31')>
@@ -224,7 +221,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/153-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/153.png'
   games_4:
     name: 'Civilization VI'
     publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
@@ -243,7 +239,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_3'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/952-2.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/952.png'
   games_6:
     name: 'Apex la Légende'
     publishedAt: <dateTimeBetween('2019-01-01', '2019-12-31')>
@@ -262,7 +257,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_5'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/10771-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/10771.png'
   games_8:
     name: 'Player Unknown Battleground'
     publishedAt: <dateTimeBetween('2016-01-01', '2016-12-31')>
@@ -291,7 +285,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_7'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/20952-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/20952.png'
   games_11:
     name: 'Minecraft'
     publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
@@ -300,7 +293,6 @@ App\Entity\Game:
     countries: '@country_{1, 2, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/70429-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/68757-1.png'
   games_12:
     name: 'The Witcher III : Wild Hunt'
     publishedAt: <dateTimeBetween('2015-01-01', '2015-12-31')>
@@ -310,7 +302,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_8'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/33255-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/33255.png'
   games_13:
     name: 'The Elder Scrolls V : Skyrim'
     publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
@@ -320,7 +311,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_9'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/43879-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/43879.png'
   games_14:
     name: 'Dark Souls'
     publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
@@ -339,7 +329,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_11'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/12-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/12.png'
   games_16:
     name: "Cyberpunk 2077"
     publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
@@ -349,7 +338,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_8'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/22722-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/22722-1.png'
   games_17:
     name: "Borderlands 2"
     publishedAt: <dateTimeBetween('2012-01-01', '2012-12-31')>
@@ -359,7 +347,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_12'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/78354-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/5647.png'
   games_18:
     name: "Final Fantasy VII"
     publishedAt: <dateTimeBetween('1997-01-01', '1997-12-31')>
@@ -369,7 +356,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_13'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/29221-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/525.png'
   games_19:
     name: "SimCity 2000"
     publishedAt: <dateTimeBetween('1993-01-01', '1993-12-31')>
@@ -379,7 +365,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_14'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/771-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/771.png'
   games_20:
     name: "Age of Empire II"
     publishedAt: <dateTimeBetween('1993-01-01', '1993-12-31')>
@@ -389,7 +374,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_15'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/749-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/16096.png'
   games_21:
     name: "Monster Hunter : World"
     publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
@@ -408,7 +392,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/912-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/912.png'
   games_23:
     name: "Path of Exile"
     publishedAt: <dateTimeBetween('2013-01-01', '2013-12-31')>
@@ -418,7 +401,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_17'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/11131-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/11131.png'
   games_24:
     name: "Magic : Arena"
     publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
@@ -428,7 +410,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_18'
     thumbnail_cover: 'https://images.ctfassets.net/s5n2t79q9icq/1zRKpcySEKfuKb9tBCqW9e/d5c1483085cb1a1958ea67a096461419/AsWSTijxCt.jpg?fm=webp'
-    thumbnail_logo: 'https://images.ctfassets.net/s5n2t79q9icq/3Z55mYwwA9H6AGX44YkUJ5/fef06bf05ab422d05c4981af843880b8/arena-logo-medium.png?fm=webp'
   games_25:
     name: "Hearthstone"
     publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
@@ -438,7 +419,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/18552-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/18552.png'
   games_26:
     name: "Heroes of the Storm"
     publishedAt: <dateTimeBetween('2015-01-01', '2015-12-31')>
@@ -456,7 +436,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/20196-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/20196.png'
   games_28:
     name: "Red Dead Redemption 2"
     publishedAt: <dateTimeBetween('2010-01-01', '2010-12-31')>
@@ -466,7 +445,6 @@ App\Entity\Game:
     description : '<paragraph(8)>'
     publisher: '@publisher_7'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/66595-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/55247-1.png'
   games_29:
     name: "Destiny 2"
     publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
@@ -475,7 +453,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/77521-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/50624.png'
   games_30:
     name: "Valorant"
     publishedAt: <dateTimeBetween('2020-01-01', '2020-12-31')>
@@ -501,7 +478,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/64830-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/64830-1.png'
   games_33:
     name: "Star Wars Battlefront II"
     publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
@@ -518,7 +494,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/16136-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/16136.png'
   games_35:
     name: "Total War : Warhammer II"
     publishedAt: <dateTimeBetween('2017-01-01', '2017-12-31')>
@@ -551,7 +526,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/235-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/235.png'
   games_39:
     name: "The Binding of Isaac : Rebirth"
     publishedAt: <dateTimeBetween('2014-01-01', '2014-12-31')>
@@ -560,7 +534,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/25701-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/25701.png'
   games_40:
     name: "Star Wars Jedi : Fallen Order"
     publishedAt: <dateTimeBetween('2019-01-01', '2019-12-31')>
@@ -577,7 +550,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/855-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/855.png'
   games_42:
     name: "Battlefield V"
     publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
@@ -594,7 +566,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/7804-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/7804.png'
   games_44:
     name: "The Sims 3"
     publishedAt: <dateTimeBetween('2011-01-01', '2011-12-31')>
@@ -603,7 +574,6 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/8833-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/8833.png'
   games_45:
     name: "Far Cry 5"
     publishedAt: <dateTimeBetween('2018-01-01', '2018-12-31')>
@@ -612,20 +582,37 @@ App\Entity\Game:
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/52745-1.jpg'
-    thumbnail_logo: 'https://cdn.thegamesdb.net/images/original/clearlogo/52745.png'
 
-App\Entity\Library:
+App\Entity\UserOwnGame:
   library_{0..1499}:
-    installed: 0
+    isInstalled: 0
     gameTime: <numberBetween(4000, 500000)>
-    account: '@account_<numberBetween(0, 1350)>'
-    createdAt: '<dateTimeBetween(@self->account.createdAt, NOW)>'
+    user: '@user_<numberBetween(0, 1350)>'
+    createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
     lastUsedAt: <dateTimeBetween($createdAt, NOW)>
     game: '@games_<numberBetween(0, 45)>'
   library_{1500..11999}:
-    installed: 1
+    isInstalled: 1
     gameTime: <numberBetween(4000, 10000000)>
-    account: '@account_<numberBetween(0, 1350)>'
-    createdAt: '<dateTimeBetween(@self->account.createdAt, NOW)>'
+    user: '@user_<numberBetween(0, 1350)>'
+    createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
     lastUsedAt: <dateTimeBetween($createdAt, NOW)>
     game: '@games_<numberBetween(0, 45)>'
+
+App\Entity\Review:
+  review_{0..150}:
+    content: <paragraph(4)>
+    account: '@user_<numberBetween(0, 1399)>'
+    createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
+    game: '@games_0'
+    upvotes: <numberBetween(0, 20)>
+    downvotes: <numberBetween(0, 100)>
+    rank: <numberBetween(0, 2)>
+  review_{151..7999}:
+    content: <paragraph(4)>
+    account: '@user_<numberBetween(0, 1399)>'
+    game: '@games_<numberBetween(1, 45)>'
+    createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
+    upvotes: <numberBetween(0, 100)>
+    downvotes: <numberBetween(0, 100)>
+    rank: <numberBetween(1, 5)>
