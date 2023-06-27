@@ -6,7 +6,7 @@
         <link rel="shortcut icon" type="image/png" href="{{ asset('/build/images/favicon.png') }}"/>
         <title>
             {% block title %}
-                Maude Photographie
+                Oups
             {% endblock %}
         </title>
 
@@ -22,17 +22,8 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
-
-        {% block header %}
-            {% include 'front/common/header.html.twig' %}
-        {% endblock %}
-
+    <body class="container">
         {% block body %}
-        {% endblock %}
-
-        {% block footer %}
-            {% include 'front/common/footer.html.twig' %}
         {% endblock %}
     </body>
 </html>

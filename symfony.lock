@@ -1,4 +1,18 @@
 {
+    "api-platform/core": {
+        "version": "2.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.5",
+            "ref": "05b57782a78c21a664a42055dc11cf1954ca36bb"
+        },
+        "files": [
+            "./config/packages/api_platform.yaml",
+            "./config/routes/api_platform.yaml",
+            "./src/Entity/.gitignore"
+        ]
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -84,21 +98,6 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
-    "friendsofsymfony/ckeditor-bundle": {
-        "version": "2.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.0",
-            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
-        },
-        "files": [
-            "./config/packages/fos_ckeditor.yaml"
-        ]
-    },
-    "gregwar/captcha-bundle": {
-        "version": "v2.2.0"
-    },
     "knplabs/knp-components": {
         "version": "v3.0.1"
     },
@@ -114,11 +113,20 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
-    "lexik/form-filter-bundle": {
-        "version": "v6.0.5"
-    },
     "monolog/monolog": {
         "version": "2.2.0"
+    },
+    "nelmio/cors-bundle": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "./config/packages/nelmio_cors.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
