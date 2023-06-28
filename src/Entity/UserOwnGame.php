@@ -6,39 +6,51 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserOwnGameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserOwnGameRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        'get'
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'userOwnGames:list'
+            ]
+        ],
     ],
-    itemOperations: [],
+    itemOperations: ['get'],
 )]
 class UserOwnGame
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('userOwnGames:list')]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['userOwnGames:list', 'user:item'])]
     private ?Game $game = null;
 
     #[ORM\ManyToOne(inversedBy: 'userOwnGames')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['userOwnGames:list'])]
     private ?User $user = null;
 
     #[ORM\Column]
+    #[Groups(['userOwnGames:list', 'user:item'])]
     private ?bool $isInstalled = null;
 
     #[ORM\Column]
+    #[Groups(['userOwnGames:list', 'user:item'])]
     private ?int $gameTime = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['userOwnGames:list', 'user:item'])]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['userOwnGames:list', 'user:item'])]
     private ?\DateTimeInterface $lastUsedAt = null;
 
     public function getId(): ?int
@@ -116,5 +128,20 @@ class UserOwnGame
         $this->lastUsedAt = $lastUsedAt;
 
         return $this;
+    }
+
+    /**
+     * Converti l'attribut gameTime (qui est en seconde)
+     *
+     * @return string
+     */
+    #[Groups(['userOwnGames:list', 'user:item'])]
+    public function getDurationHM(): string {
+        $hours = floor($this->gameTime / 3600);
+        $minutes = ($this->gameTime % 60);
+        if ($minutes < 10) {
+            $minutes = '0' . $minutes;
+        }
+        return $hours. 'h' . $minutes;
     }
 }

@@ -17,18 +17,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
             ]
         ],
     ],
-    itemOperations: [],
+    itemOperations: ['get'],
 )]
 class Game
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('games:list')]
+    #[Groups(['games:list', 'userOwnGames:list', 'user:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('games:list')]
+    #[Groups(['games:list', 'userOwnGames:list', 'user:item'])]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -46,7 +46,7 @@ class Game
     private ?string $thumbnailCover = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('games:list')]
+    #[Groups(['games:list', 'userOwnGames:list', 'user:item'])]
     private ?string $slug = null;
 
     public function getId(): ?int

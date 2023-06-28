@@ -8,14 +8,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        'post'
+        'post',
+        'get'
     ],
     itemOperations: [
-        'get',
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'user:item'
+            ]
+        ],
         'put',
     ],
 )]
@@ -24,27 +30,35 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:item')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:item')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:item')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:item')]
     private ?string $nickname = null;
 
     #[ORM\Column]
+    #[Groups('user:item')]
     private ?float $wallet = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups('user:item')]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\ManyToOne]
+    #[Groups('user:item')]
     private ?Country $country = null;
 
-    #[ORM\OneToMany(mappedBy: 'User', targetEntity: UserOwnGame::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserOwnGame::class, orphanRemoval: true)]
+    #[Groups('user:item')]
     private Collection $userOwnGames;
 
     public function __construct()
@@ -157,5 +171,23 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @return string return the total duration as HH:MM
+     */
+    #[Groups(['user:item'])]
+    public function getTotalGameTime(): string {
+        $totalGameTime = 0;
+        foreach ($this->userOwnGames as $userOwnGame) {
+            /** @var UserOwnGame $userOwnGame */
+            $totalGameTime += $userOwnGame->getGameTime();
+        }
+        $hours = floor($totalGameTime / 3600);
+        $minutes = ($totalGameTime % 60);
+        if ($minutes < 10) {
+            $minutes = '0' . $minutes;
+        }
+        return $hours. 'h' . $minutes;
     }
 }
