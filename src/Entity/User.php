@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,6 +35,20 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
         'put',
     ],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'name' => 'partial',
+        'email' => 'partial',
+        'nickname' => 'partial',
+        'createdAt' => 'partial',
+        'country.name' => 'partial',
+    ],
+)]
+#[ApiFilter(
+    DateFilter::class, properties: [
+        'createdAt'
+    ]
 )]
 class User
 {

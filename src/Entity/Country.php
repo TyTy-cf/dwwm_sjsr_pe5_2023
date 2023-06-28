@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\CountryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -20,6 +22,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     itemOperations: [
         'get',
         'put',
+    ],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'name' => 'partial',
+        'nationality' => 'partial',
     ],
 )]
 class Country

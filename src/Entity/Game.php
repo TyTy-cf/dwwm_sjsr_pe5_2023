@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
@@ -27,6 +28,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'description' => 'partial'
     ],
 )]
+#[ApiFilter(
+    OrderFilter::class,
+    properties: [
+        'name',
+        'price',
+    ],
+    arguments: [
+        'orderParameterName' => 'order'
+    ])
+]
 class Game
 {
     #[ORM\Id]
