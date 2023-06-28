@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +20,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
     ],
     itemOperations: ['get'],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'price' => 'exact',
+        'name' => 'partial',
+    ]
 )]
 class Game
 {
@@ -42,7 +50,7 @@ class Game
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('games:list')]
+    #[Groups(['games:list', 'user:item'])]
     private ?string $thumbnailCover = null;
 
     #[ORM\Column(length: 255)]

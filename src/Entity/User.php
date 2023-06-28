@@ -13,11 +13,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        'post',
+        'post' => [ // On désérialise : json => objet donc "denormalization_context"
+            'denormalization_context' => [
+                'groups' => 'user:post'
+            ]
+        ],
         'get'
     ],
     itemOperations: [
-        'get' => [
+        'get' => [ // On sérialise : objet => json donc "normalization_context"
             'normalization_context' => [
                 'groups' => 'user:item'
             ]
@@ -34,24 +38,24 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:post'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:post'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:post'])]
     private ?string $nickname = null;
 
     #[ORM\Column]
     #[Groups('user:item')]
-    private ?float $wallet = null;
+    private ?float $wallet = 0.0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups('user:item')]
-    private ?\DateTimeInterface $createdAt = null;
+    private ?\DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne]
     #[Groups('user:item')]
@@ -64,6 +68,7 @@ class User
     public function __construct()
     {
         $this->userOwnGames = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
