@@ -13,15 +13,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
     collectionOperations: [
-        'post' => [ // On désérialise : json => objet donc "denormalization_context"
+        'post' => [
             'denormalization_context' => [
                 'groups' => 'user:post'
             ]
         ],
-        'get'
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'user:list'
+            ]
+        ],
     ],
     itemOperations: [
-        'get' => [ // On sérialise : objet => json donc "normalization_context"
+        'get' => [
             'normalization_context' => [
                 'groups' => 'user:item'
             ]
@@ -34,31 +38,31 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:list', 'userOwnGames:post'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:item', 'user:post'])]
+    #[Groups(['user:item', 'user:list', 'user:post', 'userOwnGames:post'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:item', 'user:post'])]
+    #[Groups(['user:item', 'user:list', 'user:post'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:item', 'user:post'])]
+    #[Groups(['user:item', 'user:list', 'user:post'])]
     private ?string $nickname = null;
 
     #[ORM\Column]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:list'])]
     private ?float $wallet = 0.0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:list'])]
     private ?\DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne]
-    #[Groups('user:item')]
+    #[Groups(['user:item', 'user:list'])]
     private ?Country $country = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserOwnGame::class, orphanRemoval: true)]

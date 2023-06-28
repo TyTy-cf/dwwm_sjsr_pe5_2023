@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,16 +23,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [
-        'price' => 'exact',
         'name' => 'partial',
-    ]
+        'description' => 'partial'
+    ],
 )]
 class Game
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['games:list', 'userOwnGames:list', 'user:item'])]
+    #[Groups(['games:list', 'userOwnGames:list', 'user:item', 'userOwnGames:post'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -54,7 +54,7 @@ class Game
     private ?string $thumbnailCover = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['games:list', 'userOwnGames:list', 'user:item'])]
+    #[Groups(['games:list', 'userOwnGames:list', 'user:item', 'userOwnGames:post'])]
     private ?string $slug = null;
 
     public function getId(): ?int

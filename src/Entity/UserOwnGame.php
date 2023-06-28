@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserOwnGameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,8 +20,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'groups' => 'userOwnGames:list'
             ]
         ],
+        'post' => [
+            'denormalization_context' => [
+                'groups' => 'userOwnGames:post'
+            ]
+        ]
     ],
     itemOperations: ['get'],
+)]
+#[ApiFilter(
+    BooleanFilter::class, properties: [
+        'isInstalled'
+    ]
+)]
+#[ApiFilter(
+    DateFilter::class, properties: [
+        'createdAt'
+    ]
 )]
 class UserOwnGame
 {
@@ -29,21 +48,21 @@ class UserOwnGame
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['userOwnGames:list', 'user:item'])]
+    #[Groups(['userOwnGames:list', 'user:item', 'userOwnGames:post'])]
     private ?Game $game = null;
 
     #[ORM\ManyToOne(inversedBy: 'userOwnGames')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['userOwnGames:list'])]
+    #[Groups(['userOwnGames:list', 'userOwnGames:post'])]
     private ?User $user = null;
 
     #[ORM\Column]
     #[Groups(['userOwnGames:list', 'user:item'])]
-    private ?bool $isInstalled = null;
+    private ?bool $isInstalled = false;
 
     #[ORM\Column]
     #[Groups(['userOwnGames:list', 'user:item'])]
-    private ?int $gameTime = null;
+    private ?int $gameTime = 0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups(['userOwnGames:list', 'user:item'])]
@@ -52,6 +71,11 @@ class UserOwnGame
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups(['userOwnGames:list', 'user:item'])]
     private ?\DateTimeInterface $lastUsedAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {

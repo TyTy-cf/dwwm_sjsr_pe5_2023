@@ -11,7 +11,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     collectionOperations: [
         'get',
-        'post'
+        'post' => [
+            'denormalization_context' => [
+                'groups' => 'country:post'
+            ]
+        ]
     ],
     itemOperations: [
         'get',
@@ -26,18 +30,21 @@ class Country
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:list', 'user:item', 'country:post'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('country:post')]
     private ?string $nationality = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $urlFlag = null;
 
     #[ORM\Column(length: 2)]
+    #[Groups('country:post')]
     private ?string $code = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
     public function getId(): ?int
