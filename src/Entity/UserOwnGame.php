@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\UserOwnGame\PostAction;
 use App\Repository\UserOwnGameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,6 +24,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'post' => [
             'denormalization_context' => [
                 'groups' => 'userOwnGames:post'
+            ],
+            'controller' => [
+                PostAction::class,
+                'handle',
             ]
         ]
     ],
@@ -68,7 +73,7 @@ class UserOwnGame
     #[Groups(['userOwnGames:list', 'user:item'])]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['userOwnGames:list', 'user:item'])]
     private ?\DateTimeInterface $lastUsedAt = null;
 

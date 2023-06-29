@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -35,6 +36,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
         'put',
     ],
+    paginationItemsPerPage: 10
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [
@@ -60,14 +62,18 @@ class User
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post', 'userOwnGames:post'])]
+    #[Assert\NotBlank(message: 'Ce nom doit être renseigné')]
+    #[Assert\Unique(message: 'Ce nom existe déjà')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post'])]
+    #[Assert\NotBlank(message: 'L\'email doit être renseigné')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post'])]
+    #[Assert\NotBlank(message: 'Le pseudo doit être renseigné')]
     private ?string $nickname = null;
 
     #[ORM\Column]
