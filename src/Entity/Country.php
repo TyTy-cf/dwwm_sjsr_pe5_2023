@@ -38,7 +38,7 @@ class Country
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['user:list', 'user:item', 'country:post'])]
+    #[Groups(['user:list', 'user:item', 'country:post', 'publisher:item', 'publisher:list'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -46,6 +46,7 @@ class Country
     private ?string $nationality = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['publisher:item', 'publisher:list'])]
     private ?string $urlFlag = null;
 
     #[ORM\Column(length: 2)]
@@ -53,6 +54,7 @@ class Country
     private ?string $code = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['publisher:post', 'publisher:item', 'publisher:list'])]
     private ?string $slug = null;
 
     public function getId(): ?int

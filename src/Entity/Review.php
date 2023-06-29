@@ -2,40 +2,88 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ReviewRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'post' => [
+            'denormalization_context' => [
+                'groups' => 'review:post'
+            ]
+        ],
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'review:list'
+            ]
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'review:item'
+            ]
+        ],
+    ]
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'game.name' => 'partial'
+    ]
+)]
+#[ApiFilter(
+    OrderFilter::class, properties: [
+        'createdAt',
+        'rating',
+    ]
+)]
 class Review
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['review:item'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['review:item', 'review:post'])]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
+    #[Groups(['review:list', 'review:item', 'review:post'])]
     private ?User $user = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[Groups(['review:list', 'review:item'])]
+    private ?\DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
+    #[Groups(['review:list', 'review:item', 'review:post'])]
     private ?Game $game = null;
 
     #[ORM\Column]
-    private ?int $upVote = null;
+    #[Groups(['review:item'])]
+    private ?int $upVote = 0;
 
     #[ORM\Column]
-    private ?int $downVote = null;
+    #[Groups(['review:item'])]
+    private ?int $downVote = 0;
 
     #[ORM\Column]
+    #[Groups(['review:list', 'review:item', 'review:post'])]
     private ?float $rating = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
