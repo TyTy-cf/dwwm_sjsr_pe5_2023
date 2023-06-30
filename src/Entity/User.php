@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -52,12 +54,11 @@ use Symfony\Component\Validator\Constraints as Assert;
         'createdAt'
     ]
 )]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['user:item', 'user:list', 'userOwnGames:post'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -66,10 +67,17 @@ class User
     #[Assert\Unique(message: 'Ce nom existe déjà')]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(['user:item', 'user:list', 'user:post'])]
-    #[Assert\NotBlank(message: 'L\'email doit être renseigné')]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post'])]
@@ -107,18 +115,6 @@ class User
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -131,58 +127,172 @@ class User
         return $this;
     }
 
-    public function getNickname(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->nickname;
+        return (string) $this->email;
     }
 
-    public function setNickname(string $nickname): static
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
     {
-        $this->nickname = $nickname;
-
-        return $this;
+        return (string) $this->email;
     }
 
-    public function getWallet(): ?float
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        return $this->wallet;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    public function setWallet(float $wallet): static
+    public function setRoles(array $roles): static
     {
-        $this->wallet = $wallet;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?Country $country): static
-    {
-        $this->country = $country;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, UserOwnGame>
+     * @see PasswordAuthenticatedUserInterface
      */
-    public function getUserOwnGames(): Collection
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     * @return User
+     */
+    public function setName(?string $name): User
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @param string|null $nickname
+     * @return User
+     */
+    public function setNickname(?string $nickname): User
+    {
+        $this->nickname = $nickname;
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getWallet(): ?float
+    {
+        return $this->wallet;
+    }
+
+    /**
+     * @param float|null $wallet
+     * @return User
+     */
+    public function setWallet(?float $wallet): User
+    {
+        $this->wallet = $wallet;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|\DateTimeInterface|null
+     */
+    public function getCreatedAt(): \DateTime|\DateTimeInterface|null
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime|\DateTimeInterface|null $createdAt
+     * @return User
+     */
+    public function setCreatedAt(\DateTime|\DateTimeInterface|null $createdAt): User
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Country|null
+     */
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param Country|null $country
+     * @return User
+     */
+    public function setCountry(?Country $country): User
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getUserOwnGames(): ArrayCollection|Collection
     {
         return $this->userOwnGames;
     }
@@ -228,9 +338,9 @@ class User
     }
 
     /**
-     * @return Collection<int, Review>
+     * @return ArrayCollection|Collection
      */
-    public function getReviews(): Collection
+    public function getReviews(): ArrayCollection|Collection
     {
         return $this->reviews;
     }
@@ -255,5 +365,10 @@ class User
         }
 
         return $this;
+    }
+
+    #[Groups(['user:item', 'user:list'])]
+    public function isAdmin(): bool {
+        return in_array('ROLE_ADMIN', $this->roles);
     }
 }

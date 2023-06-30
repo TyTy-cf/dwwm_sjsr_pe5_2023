@@ -4,7 +4,7 @@
 namespace App\Controller\Front;
 
 
-use App\Entity\User;
+use App\Entity\UserTest;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

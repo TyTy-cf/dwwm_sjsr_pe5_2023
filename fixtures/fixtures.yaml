@@ -83,7 +83,7 @@ App\Entity\User:
     country: '@country_<numberBetween(0, 11)>'
 #    phone_number: <phoneNumber()>
     #        password is : testtest
-#    password: "\\$2y\\$13\\$IxLbNOJZ2MbYHehPhynFwOun0bQ9lGy6PqXzsv/yJ0RZGW2gElBW6"
+    password: "\\$2y\\$13\\$IxLbNOJZ2MbYHehPhynFwOun0bQ9lGy6PqXzsv/yJ0RZGW2gElBW6"
 
 App\Entity\Category:
   category_0:
@@ -570,14 +570,14 @@ App\Entity\UserOwnGame:
   user_own_game_{0..1499}:
     isInstalled: 0
     gameTime: <numberBetween(4000, 500000)>
-    user: '@user_<numberBetween(0, 1350)>'
+    user: '@user_<numberBetween(0, 1780)>'
     createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
     lastUsedAt: <dateTimeBetween($createdAt, NOW)>
     game: '@games_<numberBetween(0, 45)>'
   user_own_game_{1500..11999}:
     isInstalled: 1
     gameTime: <numberBetween(4000, 10000000)>
-    user: '@user_<numberBetween(0, 1350)>'
+    user: '@user_<numberBetween(0, 1780)>'
     createdAt: '<dateTimeBetween(@self->user.createdAt, NOW)>'
     lastUsedAt: <dateTimeBetween($createdAt, NOW)>
     game: '@games_<numberBetween(0, 45)>'

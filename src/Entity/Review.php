@@ -102,12 +102,12 @@ class Review
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?UserTest
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?UserTest $user): static
     {
         $this->user = $user;
 

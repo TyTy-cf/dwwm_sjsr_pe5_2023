@@ -4,7 +4,7 @@ namespace App\Controller\Api\UserOwnGame;
 
 use App\Entity\UserOwnGame;
 use App\Repository\GameRepository;
-use App\Repository\UserRepository;
+use App\Repository\UserTestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,9 +15,9 @@ class PostAction extends AbstractController
 {
 
     public function handle(
-        Request $request,
-        GameRepository $gameRepository,
-        UserRepository $userRepository,
+        Request                $request,
+        GameRepository         $gameRepository,
+        UserTestRepository     $userRepository,
         EntityManagerInterface $em
     ): JsonResponse {
         $json = json_decode($request->getContent(), true);
