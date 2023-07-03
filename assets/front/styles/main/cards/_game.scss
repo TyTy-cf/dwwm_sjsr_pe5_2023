@@ -1,0 +1,25 @@
+
+.card-game-container {
+  width: 100%;
+  height: 120px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.6em;
+    transition: ease-out 0.25s;
+
+    &:hover {
+      transform: scale(1.05);
+      transition: ease-in 0.25s;
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+.card-game-name {
+  font-size: 0.8em;
+}

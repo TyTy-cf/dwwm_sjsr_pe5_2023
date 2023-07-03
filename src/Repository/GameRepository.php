@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\UserOwnGame;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,28 +42,33 @@ class GameRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Game[] Returns an array of Game objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findTendances(
+        ?int $limit = null,
+        bool $includeDate = false,
+        DateTime $date = null
+    ): array {
+//        SELECT g.* FROM game g
+        $qb = $this->createQueryBuilder('g')
+//        JOIN user_own_game ON user_own_game.game_id = g.id
+            ->join(
+                UserOwnGame::class,
+                'uog',
+                Join::WITH,
+                'uog.game = g'
+            );
 
-//    public function findOneBySomeField($value): ?Game
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if ($includeDate && $date !== null) {
+//        WHERE user_own_game.created_at <= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 MONTH)
+            $qb->where('uog.createdAt >= :date')
+                ->setParameter('date', $date);
+        }
+//        GROUP BY g.id
+        return $qb->groupBy('g.id')
+//        ORDER BY COUNT(*) DESC;
+            ->orderBy('COUNT(g)', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
