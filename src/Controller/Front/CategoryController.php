@@ -9,10 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/categorie', name: 'app_category_')]
 class CategoryController extends AbstractController
 {
 
-    #[Route('/category/new', name: 'app_category_new')]
+    #[Route('/{id}', name: 'show')]
+    public function show(string $id): Response {
+        dd($id);
+    }
+
+    #[Route('/creer', name: 'new')]
     public function new(Request $request): Response {
         $form = $this->createForm(CategoryType::class, new Category());
         $form->handleRequest($request);

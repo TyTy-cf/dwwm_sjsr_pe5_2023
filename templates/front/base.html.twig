@@ -6,7 +6,6 @@
         <link rel="shortcut icon" type="image/png" href="{{ asset('/build/images/favicon.png') }}"/>
         <title>
             {% block title %}
-                Oups
             {% endblock %}
         </title>
 
@@ -25,5 +24,9 @@
     <body class="container">
         {% block body %}
         {% endblock %}
+
+        {% block metadata %}
+        {% endblock %}
     </body>
+
 </html>

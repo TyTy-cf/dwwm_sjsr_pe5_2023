@@ -1,33 +1,24 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-    <h1>Super title</h1>
+{% block title %}
+    Onglet nav
+{% endblock %}
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    <input type="checkbox" data-cbox-all>
-                </th>
-                <th>Toto</th>
-                <th>Tata</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <input type="checkbox" data-my-custom-attr="element-line-1">
-                </td>
-                <td>Oui</td>
-                <td>Non</td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="checkbox" data-my-custom-attr="element-line-2">
-                </td>
-                <td>Oui</td>
-                <td>Non</td>
-            </tr>
-        </tbody>
-    </table>
+{% block leogout_seo %}
+    <meta name="description"
+          content="instant-faking.com : Achat en ligne de jeux vidéos dématérialisés">
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Instant-Faking</h1>
+
+    <a href="{{ path('app_category_new') }}">
+        Créer une catégorie
+    </a>
+
+    <a href="{{ path('app_category_show', {'id': 10}) }}">
+        Voir la catég 10
+    </a>
+
 {% endblock %}

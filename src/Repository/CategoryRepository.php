@@ -39,28 +39,18 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Effectue une recherche de type "LIKE %_%" parmi les noms de catégories
+     *
+     * @param string $name le nom à rechercher parmi les catégories
+     * @return array
+     */
+    public function findAllByApproxName(string $name): array {
+        return $this->createQueryBuilder('c')
+            ->where('c.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->getQuery()
+            ->getArrayResult();
+    }
 
-//    public function findOneBySomeField($value): ?Category
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

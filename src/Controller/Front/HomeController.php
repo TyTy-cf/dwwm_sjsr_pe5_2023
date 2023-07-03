@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 
 
 use App\Entity\UserTest;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

@@ -22,6 +22,5 @@ function hideShowFormProfile() {
 }
 
 window.addEventListener('load', () => {
-    console.log(window.location.href);
     hideShowFormProfile();
 });
