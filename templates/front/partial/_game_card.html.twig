@@ -5,7 +5,9 @@
 
 <div class="{{ containerClass }}">
     <div class="card-game-container">
-        <img src="{{ game.thumbnailCover }}">
+        <a href="{{ path('app_game_show', { 'slug': game.slug }) }}">
+            <img src="{{ game.thumbnailCover }}">
+        </a>
     </div>
     <div class="d-flex justify-content-between">
         <div>

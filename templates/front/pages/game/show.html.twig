@@ -1,0 +1,73 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+    Acheter : {{ game.name }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="mt-5">
+        <div class="container-top row">
+            <div class="col-7 p-0 h-100">
+                <div class="container-image-game-show">
+                    <img src="{{ game.thumbnailCover }}">
+                </div>
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-4 my-auto">
+                <div class="h-100">
+                    <h1 class="text-center">{{ game.name }}</h1>
+                    {% if game.countries|length > 0 %}
+                        <div class="align-items-center">
+                            <p>Disponible en :</p>
+                            <div class="d-flex flex-wrap">
+                                {% for country in game.countries %}
+                                    <img src="{{ country.urlFlag }}"
+                                         alt="{{ country.name }}"
+                                         title="{{ country.nationality }}"
+                                         {% if not loop.last %}class="me-1"{% endif %}
+                                    >
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <p class="my-4 fs-2 text-center">{{ game.price }}€</p>
+                    <div class="w-100 mt-4">
+                        <button class="button-fire fs-3">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-7">
+                    <h2>A propos du jeu :</h2>
+                    <p>{{ game.description }}</p>
+                </div>
+                <div class="col-1">
+                </div>
+                <div class="col-4">
+                    <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h2>Les commentaires</h2>
+            <div class="row">
+                {% for review in game.reviews %}
+                    <div class="col-md-3">
+                        {{ review.content }}
+                        <p>Par <span class="fw-bold">{{ review.user.name }}</span></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

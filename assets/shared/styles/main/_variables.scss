@@ -7,3 +7,7 @@ $font-family: 'Oswald', sans-serif;
 $main-background-color: #272727;
 $main-color: #fff;
 $orange: #ff5400;
+$light-orange-20: lighten($orange, 0.2);
+
+$fire-gradient: linear-gradient(10deg, #ff8000, transparent) #ff4020;
+$fire-gradient-hover: linear-gradient(190deg, #ff2020, #ff8000);
