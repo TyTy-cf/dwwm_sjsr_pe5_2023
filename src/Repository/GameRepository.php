@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Game;
 use App\Entity\UserOwnGame;
 use DateTime;
@@ -67,6 +68,20 @@ class GameRepository extends ServiceEntityRepository
 //        ORDER BY COUNT(*) DESC;
             ->orderBy('COUNT(g)', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+//        SELECT *
+//        FROM game
+//        JOIN game_category ON game_category.game_id = game.id
+//        JOIN category ON game_category.category_id = category.id
+//        WHERE category = $category;
+    public function findByCategory(Category $category): array {
+        return $this->createQueryBuilder('g')
+            ->join('g.categories', 'categ')
+            ->where('categ = :categ')
+            ->setParameter('categ', $category)
             ->getQuery()
             ->getResult();
     }

@@ -14,7 +14,8 @@ class CategoryController extends AbstractController
 {
 
     #[Route('/{id}', name: 'show')]
-    public function show(string $id): Response {
+    public function show(Request $request, string $id): Response {
+        dump($request->get('id'));
         dd($id);
     }
 

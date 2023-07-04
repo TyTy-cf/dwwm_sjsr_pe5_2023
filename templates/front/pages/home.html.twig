@@ -11,25 +11,21 @@
 
 {% block body %}
 
+    <a href="{{ path('app_category_show', { 'id': 10 }) }}">
+        Voir la catégorie 10
+    </a>
+
     <h1 class="text-center">Instant-Faking</h1>
 
     <h2 class="mt-5 mb-4">Les tendances</h2>
 
     <div class="row">
-        {% for game in tendances %}
-            <div class="col-4">
-                <div class="card-game-container">
-                    <img src="{{ game.thumbnailCover }}">
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <p class="card-game-name">{{ game.name }}</p>
-                    </div>
-                    <div>
-                        {{ game.price }}€
-                    </div>
-                </div>
-            </div>
+        {% for trendGame in tendances %}
+            {% include 'front/partial/_game_card.html.twig' with
+                {
+                    'game': trendGame,
+                }
+            %}
         {% endfor %}
     </div>
 
@@ -37,19 +33,11 @@
 
     <div class="row">
         {% for game in lastGames %}
-            <div class="col-4">
-                <div class="card-game-container">
-                    <img src="{{ game.thumbnailCover }}">
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <p class="card-game-name">{{ game.name }}</p>
-                    </div>
-                    <div>
-                        {{ game.price }}€
-                    </div>
-                </div>
-            </div>
+            {% include 'front/partial/_game_card.html.twig' with
+                {
+                    'game': game,
+                }
+            %}
         {% endfor %}
     </div>
 
@@ -67,19 +55,11 @@
 
     <div class="row">
         {% for game in bestSellers %}
-            <div class="col-4">
-                <div class="card-game-container">
-                    <img src="{{ game.thumbnailCover }}">
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <p class="card-game-name">{{ game.name }}</p>
-                    </div>
-                    <div>
-                        {{ game.price }}€
-                    </div>
-                </div>
-            </div>
+            {% include 'front/partial/_game_card.html.twig' with
+                {
+                    'game': game,
+                }
+            %}
         {% endfor %}
     </div>
 
