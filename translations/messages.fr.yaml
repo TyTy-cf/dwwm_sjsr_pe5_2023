@@ -6,9 +6,7 @@ pages:
       last_published_at: "Les dernières sorties"
       bestsellers: "Les meilleures ventes"
 
-  game:
-    show:
-      error: "Ce jeu n'a pas été reconnu !"
+  error: "Cette page n'existe pas !"
 
 common:
   button:

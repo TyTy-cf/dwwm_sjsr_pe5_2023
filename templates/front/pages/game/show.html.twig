@@ -54,7 +54,7 @@
                     <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
                     <div>
                         {% for category in game.categories %}
-                            <a href="#">
+                            <a href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
                                 {{ category.name }}
                             </a>
                         {% endfor %}
