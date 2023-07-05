@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Repository\GameRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ class GameController extends AbstractController
     ) { }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     #[Route('/{slug}', name: 'show')]
     public function show(string $slug): Response

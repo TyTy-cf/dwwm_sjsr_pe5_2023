@@ -1,0 +1,13 @@
+
+pages:
+  home:
+    title:
+      trends: "Les tendances"
+      last_published_at: "Les dernières sorties"
+      bestsellers: "Les meilleures ventes"
+
+common:
+  button:
+    confirm: "Valider"
+    cancel: "Annuler"
+

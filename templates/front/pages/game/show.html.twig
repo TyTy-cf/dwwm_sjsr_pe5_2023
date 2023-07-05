@@ -17,7 +17,7 @@
             </div>
             <div class="col-4 my-auto">
                 <div class="h-100">
-                    <h1 class="text-center">{{ game.name }}</h1>
+                    <h1 class="text-center mb-4">{{ game.name }}</h1>
                     {% if game.countries|length > 0 %}
                         <div class="align-items-center">
                             <p>Disponible en :</p>
@@ -45,13 +45,20 @@
         <div class="mt-5">
             <div class="row">
                 <div class="col-7">
-                    <h2>A propos du jeu :</h2>
+                    <h2>A propos du jeu</h2>
                     <p>{{ game.description }}</p>
                 </div>
                 <div class="col-1">
                 </div>
                 <div class="col-4">
                     <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
+                    <div>
+                        {% for category in game.categories %}
+                            <a href="#">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

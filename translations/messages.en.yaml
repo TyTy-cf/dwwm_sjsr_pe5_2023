@@ -1,0 +1,13 @@
+
+pages:
+  home:
+    title:
+      trends: "Trending"
+      last_published_at: "Last published at"
+      bestsellers: "Bestsellers"
+
+common:
+  button:
+    confirm: "Confirm"
+    cancel: "Cancel"
+

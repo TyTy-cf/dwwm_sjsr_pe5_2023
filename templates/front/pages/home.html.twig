@@ -1,7 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
 {% block title %}
-    Onglet nav
+   Instant-Faking
 {% endblock %}
 
 {% block leogout_seo %}
@@ -11,17 +11,9 @@
 
 {% block body %}
 
-    <a href="{{ path('app_category_show', { 'id': 10 }) }}">
-        Voir la catégorie 10
-    </a>
-
-    <a href="{{ path('app_category_new') }}">
-        Créer une catégorie
-    </a>
-
     <h1 class="text-center">Instant-Faking</h1>
 
-    <h2 class="mt-5 mb-4">Les tendances</h2>
+    <h2 class="mt-5 mb-4">{{ 'pages.home.title.trends'|trans }}</h2>
 
     <div class="row">
         {% for trendGame in tendances %}
@@ -33,7 +25,7 @@
         {% endfor %}
     </div>
 
-    <h2 class="mt-5 mb-4">Les dernières sorties</h2>
+    <h2 class="mt-5 mb-4">{{ 'pages.home.title.last_published_at'|trans }}</h2>
 
     <div class="row">
         {% for game in lastGames %}
@@ -55,7 +47,7 @@
         {% endfor %}
     </div>
 
-    <h2 class="mt-5 mb-4">Les meilleures ventes</h2>
+    <h2 class="mt-5 mb-4">{{ 'pages.home.title.bestsellers'|trans }}</h2>
 
     <div class="row">
         {% for game in bestSellers %}
