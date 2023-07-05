@@ -105,4 +105,19 @@ class GameRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @param Category $category
+     * @return array
+     */
+    public function findByCategory(Category $category): array
+    {
+        return $this->createQueryBuilder('g')
+            ->join('g.categories', 'c')
+            ->where('c = :category')
+            ->setParameter('category', $category)
+            ->orderBy('g.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

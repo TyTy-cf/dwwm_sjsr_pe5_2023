@@ -1,0 +1,18 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+
+    {{ user.name }}
+
+    <h1>Ses jeux</h1>
+    <div class="row">
+        {% for uog in user.userOwnGames %}
+            {% include 'front/partial/_game_card.html.twig' with
+                {
+                    'game': uog.game,
+                }
+            %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

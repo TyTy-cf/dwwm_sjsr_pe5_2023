@@ -1,0 +1,22 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="my-5">{{ category.name }}</h1>
+
+    <div class="row">
+        {% for game in games %}
+            {% include 'front/partial/_game_card.html.twig' with
+                {
+                    'game': game,
+                }
+            %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    Les jeux {{ category.name }}
+{% endblock %}
+
