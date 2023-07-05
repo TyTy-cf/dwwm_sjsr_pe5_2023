@@ -6,6 +6,10 @@ pages:
       last_published_at: "Les dernières sorties"
       bestsellers: "Les meilleures ventes"
 
+  game:
+    show:
+      error: "Ce jeu n'a pas été reconnu !"
+
 common:
   button:
     confirm: "Valider"

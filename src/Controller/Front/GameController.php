@@ -7,13 +7,15 @@ use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/game', name: 'app_game_')]
 class GameController extends AbstractController
 {
 
     public function __construct(
-        private GameRepository $gameRepository
+        private GameRepository $gameRepository,
+        private TranslatorInterface $translator
     ) { }
 
     /**
@@ -25,6 +27,10 @@ class GameController extends AbstractController
         $game = $this->gameRepository->findFullOneBy($slug);
 
         if ($game === null) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans('pages.game.show.error')
+            );
             return $this->redirectToRoute('app_home');
         }
 
