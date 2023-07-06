@@ -6,6 +6,8 @@ pages:
       last_published_at: "Last published at"
       bestsellers: "Bestsellers"
 
+  error: "This page doesn't exists"
+
 common:
   button:
     confirm: "Confirm"
