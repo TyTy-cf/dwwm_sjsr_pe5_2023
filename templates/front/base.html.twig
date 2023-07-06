@@ -21,11 +21,21 @@
         {% endblock %}
     </head>
 
-    <body class="container">
-        {% block body %}
+    <body>
+        {% block header %}
+            {% include 'front/common/header.html.twig' %}
         {% endblock %}
 
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+
         {% block metadata %}
+        {% endblock %}
+
+        {% block footer %}
+            {% include 'front/common/footer.html.twig' %}
         {% endblock %}
     </body>
 

@@ -120,4 +120,19 @@ class GameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findMostPlayedGames(int $limit = 3): array {
+        return $this->createQueryBuilder('g')
+            ->join(
+                UserOwnGame::class,
+                'uog',
+                Join::WITH,
+                'uog.game = g'
+            )
+            ->groupBy('g.id')
+            ->orderBy('SUM(uog.gameTime)', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

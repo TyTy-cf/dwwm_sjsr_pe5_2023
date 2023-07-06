@@ -1,0 +1,18 @@
+
+<div class="col-3">
+    <a class="main-link game-title" href="{{ path('app_game_redirect', {'slug': review.game.slug}) }}">
+        {{ review.game.name }}
+    </a>
+    <div>
+        {% if review.rating > 0 %}
+            {% for i in 1..review.rating %}
+                <i class="fas fa-star icon-yellow"></i>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <p data-hidden="review[content]-{{ review.id }}">{{ review.content|excerpt }}</p>
+    <p data-hidden="review[content]-{{ review.id }}" class="d-none">{{ review.content }}</p>
+    Par <a class="main-link" href="{{ path('app_profile_show', {'name': review.user.name}) }}">
+        {{ review.user.name }}
+    </a>, le {{ review.createdAt|date('d/m/Y') }}
+</div>

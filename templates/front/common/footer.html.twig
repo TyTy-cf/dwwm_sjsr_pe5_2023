@@ -1,0 +1,31 @@
+
+<footer>
+
+    <div class="d-flex justify-content-evenly">
+        <div>
+            <p>{{ 'footer.most_sold.title'|trans }}</p>
+            <ul class="list-unstyled">
+                {% for category in getMostSoldCategories() %}
+                   <li>
+                        <a class="main-link" href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
+                            {{ category.name }}
+                        </a>
+                   </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <p>{{ 'footer.most_played.title'|trans }}</p>
+            <ul class="list-unstyled">
+                {% for game in getMostPlayedGames() %}
+                    <li>
+                        <a class="main-link" href="{{ path('app_game_redirect', {'slug': game.slug}) }}">
+                            {{ game.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</footer>

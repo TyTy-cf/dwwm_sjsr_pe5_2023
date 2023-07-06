@@ -7,9 +7,18 @@ pages:
       bestsellers: "Les meilleures ventes"
 
   error: "Cette page n'existe pas !"
+  game:
+    show:
+      categories: "Catégories"
 
 common:
   button:
     confirm: "Valider"
     cancel: "Annuler"
+
+footer:
+  most_sold:
+    title: "Catégories les plus vendues"
+  most_played:
+    title: "Jeux les plus jouées"
 

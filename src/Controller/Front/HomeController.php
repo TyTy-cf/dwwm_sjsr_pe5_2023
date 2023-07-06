@@ -34,7 +34,7 @@ class HomeController extends AbstractController
         $lastMonthDate = new DateTime();
         $lastMonthDate->modify('-1 month');
 
-        dd($this->categoryRepository->getMostSoldCategories());
+//        dd($this->categoryRepository->getMostSoldCategories());
 
         return $this->render('front/pages/home.html.twig', [
             'tendances' => $this->gameRepository->findTendances(9, true, $lastMonthDate),

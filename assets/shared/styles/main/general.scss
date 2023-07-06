@@ -10,3 +10,13 @@
 [data-hidden] {
   cursor: pointer;
 }
+
+.main-link {
+  color: $main-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $orange;
+    text-decoration: none;
+  }
+}

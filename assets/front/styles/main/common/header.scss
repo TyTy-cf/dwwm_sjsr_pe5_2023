@@ -1,0 +1,27 @@
+
+header {
+  background-color: $footer-background-color;
+  height: 120px;
+
+  .main-container {
+    background: $fire-gradient;
+    border-radius: 3em;
+
+    input {
+      background: transparent;
+      color: $main-color;
+      border: none;
+
+      &:focus, &:active {
+        background: $fire-gradient;
+        color: $main-color;
+        border: none;
+        box-shadow: none;
+      }
+
+      &::placeholder {
+        color: $main-color;
+      }
+    }
+  }
+}

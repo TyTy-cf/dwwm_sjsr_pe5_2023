@@ -2,21 +2,24 @@
 
 {% block body %}
 
-    {{ user.name }}
+    <h1 class="mt-5">
+        Profil de {{ user.name }}
+    </h1>
 
     <p>Temps de jeu total : {{ getUserTimeConverter(user) }}</p>
 
-    <h1>Ses jeux</h1>
+    <h1 class="mt-5">Ses jeux</h1>
     <div class="row">
         {% for uog in user.userOwnGames %}
-
-            <p>{{ uog.gameTime|time_converter }}</p>
-
-            {% include 'front/partial/_game_card.html.twig' with
-                {
-                    'game': uog.game,
-                }
-            %}
+            <div class="col-4">
+                <p class="m-0 text-center">{{ uog.gameTime|time_converter }}</p>
+                {% include 'front/partial/_game_card.html.twig' with
+                    {
+                        'game': uog.game,
+                        'containerClass': 'col-12'
+                    }
+                %}
+            </div>
         {% endfor %}
     </div>
 

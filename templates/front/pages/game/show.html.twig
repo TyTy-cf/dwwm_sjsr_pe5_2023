@@ -53,11 +53,16 @@
                 <div class="col-4">
                     <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
                     <div>
-                        {% for category in game.categories %}
-                            <a href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
-                                {{ category.name }}
-                            </a>
-                        {% endfor %}
+                        <p>{{ 'pages.game.show.categories'|trans }}</p>
+                        <ul class="list-unstyled">
+                            {% for category in game.categories %}
+                                <li>
+                                    <a class="main-link" href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
