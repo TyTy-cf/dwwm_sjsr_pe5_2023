@@ -3,7 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\Game;
+use App\Entity\UserOwnGame;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -52,5 +56,44 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
     }
+
+    public function getMostSoldCategories(int $limit = 3): array
+    {
+        $rsm = new ResultSetMapping;
+        $rsm->addEntityResult(Category::class, 'c');
+        $rsm->addFieldResult('c', 'id', 'id');
+        $rsm->addFieldResult('c', 'name', 'name');
+        $rsm->addFieldResult('c', 'slug', 'slug');
+
+        return $this->_em
+            ->createNativeQuery(
+                'SELECT c.*
+                FROM category c
+                JOIN game_category ON game_category.category_id = c.id
+                JOIN user_own_game ON user_own_game.game_id = game_category.game_id
+                GROUP BY c.id
+                ORDER BY COUNT(*) DESC
+                LIMIT ?',
+                $rsm
+            )
+            ->setParameter(1, $limit)
+            ->getResult();
+    }
+
+//        return $this->createQueryBuilder('c')
+//            ->select('c')
+//            ->join('c.games', 'games')
+//            ->join(
+//                UserOwnGame::class,
+//                'uog',
+//                Join::WITH,
+//                'uog.game = games'
+//            )
+//            ->groupBy('c.id')
+//            ->orderBy('COUNT(c)', 'DESC')
+//            ->setMaxResults($nb)
+//            ->getQuery()
+//            ->getResult();
+//    }
 
 }

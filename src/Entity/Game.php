@@ -73,7 +73,7 @@ class Game
     #[ORM\OneToMany(mappedBy: 'game', targetEntity: Review::class)]
     private Collection $reviews;
 
-    #[ORM\ManyToMany(targetEntity: Category::class)]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'games')]
     private Collection $categories;
 
     #[ORM\ManyToOne(inversedBy: 'games')]

@@ -24,7 +24,8 @@ class HomeController extends AbstractController
 
     public function __construct(
       private GameRepository $gameRepository,
-      private ReviewRepository $reviewRepository
+      private ReviewRepository $reviewRepository,
+      private CategoryRepository $categoryRepository
     ) { }
 
     #[Route('/', name: 'app_home')]
@@ -32,6 +33,8 @@ class HomeController extends AbstractController
 
         $lastMonthDate = new DateTime();
         $lastMonthDate->modify('-1 month');
+
+        dd($this->categoryRepository->getMostSoldCategories());
 
         return $this->render('front/pages/home.html.twig', [
             'tendances' => $this->gameRepository->findTendances(9, true, $lastMonthDate),
