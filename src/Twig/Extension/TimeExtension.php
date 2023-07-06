@@ -13,14 +13,20 @@ class TimeExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('time_converter', [TimeRuntime::class, 'getTimeConverter']),
+            new TwigFilter('time_converter', [
+                TimeRuntime::class,
+                'getTimeConverter'
+            ]),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('getUserTimeConverter', [TimeRuntime::class, 'getUserTimeConverter'])
+            new TwigFunction('getUserTimeConverter', [
+                TimeRuntime::class,
+                'getUserTimeConverter'
+            ])
         ];
     }
 
