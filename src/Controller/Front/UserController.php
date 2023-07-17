@@ -2,15 +2,15 @@
 
 namespace App\Controller\Front;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/profil', name: 'app_profile_')]
+#[Route(name: 'app_profile_')]
 class UserController extends AbstractController
 {
 
@@ -22,7 +22,7 @@ class UserController extends AbstractController
     /**
      * @throws NonUniqueResultException
      */
-    #[Route('/{name}', name: 'show')]
+    #[Route('/profil/{name}', name: 'show')]
     public function show(string $name): Response {
         $user = $this->userRepository->findOneFullBy($name);
 
@@ -37,6 +37,11 @@ class UserController extends AbstractController
         return $this->render('front/pages/user/show.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    #[Route('/inscription', name: 'register')]
+    public function register(Request $request): Response {
+        return $this->render('front/pages/user/register.html.twig');
     }
 
 }

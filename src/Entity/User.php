@@ -64,7 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post', 'userOwnGames:post', 'review:list', 'review:item', 'review:post'])]
     #[Assert\NotBlank(message: 'Ce nom doit être renseigné')]
-    #[Assert\Unique(message: 'Ce nom existe déjà')]
     private ?string $name = null;
 
     #[ORM\Column(length: 180, unique: true)]
