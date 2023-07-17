@@ -11,12 +11,12 @@
     <h1 class="mt-5">Ses jeux</h1>
     <div class="row">
         {% for uog in user.userOwnGames %}
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <p class="m-0 text-center">{{ uog.gameTime|time_converter }}</p>
                 {% include 'front/partial/_game_card.html.twig' with
                     {
                         'game': uog.game,
-                        'containerClass': 'col-12'
+                        'containerClass': 'col-lg-12'
                     }
                 %}
             </div>

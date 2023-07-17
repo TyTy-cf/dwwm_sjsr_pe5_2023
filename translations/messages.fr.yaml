@@ -10,6 +10,24 @@ pages:
   game:
     show:
       categories: "Catégories"
+  country:
+    success_create: "Le pays a été créé avec succès !"
+    success_edit: "Le pays a été modifié avec succès !"
+    title:
+      edit: "Modifier un pays"
+      new: "Créer un pays"
+
+form:
+  country:
+    name:
+      label: "Nom"
+      placeholder: "France, Espagne..."
+    nationality:
+      label: "Nationalité"
+      placeholder: "Français, Espagnol..."
+    code:
+      label: "Code"
+      placeholder: "fr, es..."
 
 common:
   button:

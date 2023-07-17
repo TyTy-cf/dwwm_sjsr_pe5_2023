@@ -1,0 +1,33 @@
+{% extends 'front/base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ title }}</h1>
+
+    <div class="col-lg-6 col-sm-12 mx-auto">
+        {{ form_start(form) }}
+        <div class="my-3">
+            {{ form_row(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div>
+            {{ form_row(form.nationality) }}
+            {{ form_errors(form.nationality) }}
+        </div>
+        <div class="my-3">
+            {{ form_row(form.code) }}
+            {{ form_errors(form.code) }}
+        </div>
+        <button class="btn btn-primary mb-3" type="submit">
+            Valider
+        </button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
