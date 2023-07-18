@@ -3,10 +3,27 @@
 {% block body %}
 
     <h1 class="mt-5">
-        Profil de {{ user.name }}
+        Profil de {{ user.name }} <img src="{{ user.country.urlFlag }}">
     </h1>
 
     <p>Temps de jeu total : {{ getUserTimeConverter(user) }}</p>
+
+    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+        {{ form_start(form) }}
+        <div class="mt-4">
+            {{ form_row(form.nickname) }}
+        </div>
+        <div class="my-4">
+            {{ form_row(form.password) }}
+        </div>
+        <div>
+            {{ form_row(form.country) }}
+        </div>
+        <button class="btn btn-success my-4">
+            {{ 'common.button.confirm'|trans }}
+        </button>
+        {{ form_end(form) }}
+    </div>
 
     <h1 class="mt-5">Ses jeux</h1>
     <div class="row">

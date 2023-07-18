@@ -16,6 +16,10 @@ pages:
     title:
       edit: "Modifier un pays"
       new: "Créer un pays"
+  user:
+    register:
+      title: "Inscription"
+    success_create: "Inscription réussie !"
 
 form:
   country:
@@ -28,6 +32,17 @@ form:
     code:
       label: "Code"
       placeholder: "fr, es..."
+  user:
+    name:
+      label: "Nom"
+    email:
+      label: "Email"
+    password:
+      label: "Mot de passe"
+    nickname:
+      label: "Pseudo"
+    country:
+      label: "Pays"
 
 common:
   button:
