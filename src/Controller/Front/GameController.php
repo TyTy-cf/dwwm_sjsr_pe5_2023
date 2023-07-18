@@ -48,7 +48,7 @@ class GameController extends AbstractController
 
     private function show(Game $game): Response
     {
-        $relatedGames = $this->gameRepository->findByRelatedCategory($game, 9);
+        $relatedGames = $this->gameRepository->findByRelatedCategory($game, 6);
 
         return $this->render('front/pages/game/show.html.twig', [
             'game' => $game,

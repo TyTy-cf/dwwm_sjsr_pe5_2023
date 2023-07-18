@@ -80,6 +80,19 @@
             </div>
         </div>
 
+        <div class="mt-5">
+            <h2>Les jeux similaires</h2>
+            <div class="row">
+                {% for game in relatedGames %}
+                    {% include 'front/partial/_game_card.html.twig' with
+                        {
+                            'game': game,
+                        }
+                    %}
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
