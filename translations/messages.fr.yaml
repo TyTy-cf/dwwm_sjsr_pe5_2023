@@ -20,6 +20,7 @@ pages:
     register:
       title: "Inscription"
     success_create: "Inscription réussie !"
+    success_edit: "Modification réussie !"
 
 form:
   country:

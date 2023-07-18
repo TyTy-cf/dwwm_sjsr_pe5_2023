@@ -63,10 +63,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post', 'userOwnGames:post', 'review:list', 'review:item', 'review:post'])]
-    #[Assert\NotBlank(message: 'Ce nom doit être renseigné')]
+    #[Assert\NotBlank(message: 'entity.user.name.not_blank')]
     private ?string $name = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'entity.user.email.not_blank')]
+    #[Assert\Email(message: 'entity.user.email.email')]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -76,11 +78,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'entity.user.password.not_blank')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:item', 'user:list', 'user:post'])]
-    #[Assert\NotBlank(message: 'Le pseudo doit être renseigné')]
+    #[Assert\NotBlank(message: 'entity.user.nickname.not_blank')]
     private ?string $nickname = null;
 
     #[ORM\Column]

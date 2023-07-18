@@ -1,0 +1,17 @@
+
+entity:
+  user:
+    name:
+      not_blank: "Ce nom doit être renseigné"
+    email:
+      not_blank: "Un email doit être renseigné"
+      email: "Renseigner un email valide"
+    password:
+      not_blank: "Le mot de passe doit être renseigné"
+    nickname:
+      not_blank: "Le pseudo doit être renseigné"
+
+form:
+  user:
+    profile_image:
+      mime_types: "Les formats supportés sont .jpg ou .png"

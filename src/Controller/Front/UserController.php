@@ -43,7 +43,13 @@ class UserController extends AbstractController
         );
         $form->handleRequest($request);
 
-        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userRepository->save($user, true);
+            $this->addFlash(
+                'success',
+                $this->translator->trans('pages.user.success_edit')
+            );
+        }
 
         return $this->render('front/pages/user/show.html.twig', [
             'user' => $user,
