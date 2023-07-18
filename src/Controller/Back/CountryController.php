@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Front;
+namespace App\Controller\Back;
 
 use App\Entity\Country;
 use App\Form\CountryType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 
-#[Route('/pays', name: 'app_country_')]
+#[Route('/admin/pays', name: 'app_admin_country_')]
 class CountryController extends AbstractController
 {
 
@@ -22,6 +22,12 @@ class CountryController extends AbstractController
         private TranslatorInterface $translator,
         private CountryRepository $countryRepository
     ) { }
+
+    #[Route('/', name: 'index')]
+    public function index(): Response {
+
+    }
+
 
     #[Route('/nouveau', name: 'new')]
     public function new(Request $request): Response {

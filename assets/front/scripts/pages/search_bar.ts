@@ -6,11 +6,12 @@ function initSearchBar() {
         searchBar.addEventListener('keyup', () => {
             if (searchBar.value.length >= 3) {
                 console.log(searchBar.value);
-                fetch('url de route')
+                fetch('/ajax/search-item/' + searchBar.value, {method: 'GET'})
                 .then((data) => {
                     return data.json();
                 })
                 .then((jsonData) => {
+
                 });
             }
         });
