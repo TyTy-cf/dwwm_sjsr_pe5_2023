@@ -1,0 +1,28 @@
+
+.admin-menu {
+
+  background-color: $footer-background-color;
+
+  hr {
+    margin-left: 1rem;
+  }
+
+  .menu {
+    padding-left: 2em;
+
+    a {
+      text-decoration: none;
+      color: $main-color;
+
+      &:hover {
+        color: $orange;
+      }
+
+      &.menu-active {
+        color: $orange;
+        font-size: 1.2rem;
+        text-decoration: underline;
+      }
+    }
+  }
+}

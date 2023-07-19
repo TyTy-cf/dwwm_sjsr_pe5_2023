@@ -1,0 +1,21 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ 'back.pages.category.edit.title'|trans({'%category%': category.name }) }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <a class="main-link my-auto me-3" href="{{ path('app_admin_category_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1>
+            {{ 'back.pages.category.edit.title'|trans({'%category%': category.name }) }}
+        </h1>
+        {{ include('back/pages/category/_delete_form.html.twig') }}
+    </div>
+
+    {{ include('back/pages/category/_form.html.twig', {'button_label': 'common.button.confirm'|trans}) }}
+
+{% endblock %}

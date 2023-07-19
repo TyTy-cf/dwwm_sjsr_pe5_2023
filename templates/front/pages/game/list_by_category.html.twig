@@ -2,7 +2,13 @@
 
 {% block body %}
 
-    <h1 class="my-5">{{ category.name }}</h1>
+    <h1 class="my-5">
+        {% if category is defined %}
+            {{ 'pages.game.list_by.title'|trans({'%by_something%': category.name }) }}
+        {% else %}
+            {{ 'pages.game.list_by.title'|trans({'%by_something%':  country.nationality}) }} <img alt="{{ country.name }}" src="{{ country.urlFlag }}">
+        {% endif %}
+    </h1>
 
     <div class="row">
         {% for game in games %}
@@ -16,10 +22,11 @@
 
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
-
 {% block title %}
-    Les jeux {{ category.name }}
+    {% if category is defined %}
+        {{ 'pages.game.list_by.title'|trans({'%by_something%': category.name }) }}
+    {% else %}
+        {{ 'pages.game.list_by.title'|trans({'%by_something%':  country.nationality}) }}
+    {% endif %}
 {% endblock %}
 

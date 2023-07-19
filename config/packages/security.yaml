@@ -32,8 +32,10 @@ security:
   access_control:
     - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/docs,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/login,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #    - { path: ^/api/nft,   roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
 #    - { path: ^/api/user,  roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
     - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/admin,     roles: IS_AUTHENTICATED_FULLY }
 
 

@@ -25,9 +25,10 @@ class CountryController extends AbstractController
 
     #[Route('/', name: 'index')]
     public function index(): Response {
-
+        return $this->render('back/pages/country/index.html.twig', [
+            'countries' => $this->countryRepository->findBy([], ['name' => 'ASC']),
+        ]);
     }
-
 
     #[Route('/nouveau', name: 'new')]
     public function new(Request $request): Response {
@@ -43,7 +44,7 @@ class CountryController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('front/pages/country/new.html.twig', [
+        return $this->render('back/pages/country/new.html.twig', [
            'form' => $form->createView(),
             'title' => $this->translator->trans('pages.country.title.new'),
         ]);
@@ -70,12 +71,12 @@ class CountryController extends AbstractController
                 'success',
                 $this->translator->trans('pages.country.success_edit')
             );
-            return $this->redirectToRoute('app_country_edit', [
+            return $this->redirectToRoute('app_admin_country_edit', [
                 'slug' => $country->getSlug()
             ]);
         }
 
-        return $this->render('front/pages/country/new.html.twig', [
+        return $this->render('back/pages/country/new.html.twig', [
             'form' => $form->createView(),
             'title' => $this->translator->trans('pages.country.title.edit'),
         ]);

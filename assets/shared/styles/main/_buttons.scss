@@ -1,8 +1,4 @@
 
-.button-grey {
-
-}
-
 .button-fire {
     background: $fire-gradient;
     color: white;
@@ -12,5 +8,16 @@
 
     &:hover{
       background: $fire-gradient-hover;
+    }
+}
+
+.btn-primary {
+    border-radius: 1em;
+    border: solid 0.2rem darken($orange, 10%);
+    background: $fire-gradient;
+
+    &:hover, &:focus, &:active {
+        background: $fire-gradient-hover;
+        border: solid 0.2rem darken($orange, 30%);
     }
 }

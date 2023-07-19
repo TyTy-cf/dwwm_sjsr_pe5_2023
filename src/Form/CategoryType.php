@@ -25,6 +25,7 @@ class CategoryType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class,[
+                'required' => false,
                 'constraints' => [
                     new File(
                         mimeTypes: ['image/apng', 'image/jpeg'],

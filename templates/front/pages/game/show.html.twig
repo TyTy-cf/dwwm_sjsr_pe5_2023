@@ -23,11 +23,13 @@
                             <p>Disponible en :</p>
                             <div class="d-flex flex-wrap">
                                 {% for country in game.countries %}
-                                    <img src="{{ country.urlFlag }}"
-                                         alt="{{ country.name }}"
-                                         title="{{ country.nationality }}"
-                                         {% if not loop.last %}class="me-1"{% endif %}
-                                    >
+                                    <a href="{{ path('app_game_available_by_language', {'slug': country.slug}) }}">
+                                        <img src="{{ country.urlFlag }}"
+                                             alt="{{ country.name }}"
+                                             title="{{ country.nationality }}"
+                                             {% if not loop.last %}class="me-1"{% endif %}
+                                        >
+                                    </a>
                                 {% endfor %}
                             </div>
                         </div>

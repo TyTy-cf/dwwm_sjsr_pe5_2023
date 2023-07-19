@@ -10,6 +10,8 @@ pages:
   game:
     show:
       categories: "Catégories"
+    list_by:
+      title: "Les jeux %by_something%"
   country:
     success_create: "Le pays a été créé avec succès !"
     success_edit: "Le pays a été modifié avec succès !"
@@ -49,10 +51,50 @@ common:
   button:
     confirm: "Valider"
     cancel: "Annuler"
+    delete: "Supprimer"
+  title:
+    edit: "Modifier"
+    add: "Ajouter"
+    see: "Voir plus"
+  table:
+    empty: "Aucune données"
 
 footer:
   most_sold:
     title: "Catégories les plus vendues"
   most_played:
     title: "Jeux les plus jouées"
-
+back:
+  pages:
+    country:
+      index:
+        title: "Les pays"
+        table:
+          header:
+            flag: "Drapeau"
+            name: "Nom"
+            nationality: "Nationalité"
+            code: "Code"
+    category:
+      index:
+        title: "Les catégories"
+        table:
+          header:
+            name: "Nom"
+      new:
+        title: "Ajouter une catégorie"
+      show:
+        title: "Catégorie : %category%"
+      edit:
+        title: "Modifier %category%"
+  common:
+    table:
+      header:
+        action: "Action"
+  menu:
+    country:
+      index: "Liste des pays"
+      new: "Ajouter un pays"
+    category:
+      index: "Les catégories"
+      new: "Ajouter une catégorie"

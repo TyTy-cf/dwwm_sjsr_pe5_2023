@@ -1,4 +1,4 @@
-{% extends 'front/base.html.twig' %}
+{% extends 'back/base.html.twig' %}
 
 {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
 
@@ -8,7 +8,12 @@
 
 {% block body %}
 
-    <h1>{{ title }}</h1>
+    <div>
+        <a class="main-link float-start" href="{{ path('app_admin_country_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1 class="my-4 text-center">{{ title }}</h1>
+    </div>
 
     <div class="col-lg-6 col-sm-12 mx-auto">
         {{ form_start(form) }}

@@ -1,0 +1,19 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ 'back.pages.category.new.title'|trans }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <a class="main-link my-auto me-3" href="{{ path('app_admin_category_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1 class="my-4">{{ 'back.pages.category.new.title'|trans }}</h1>
+    </div>
+
+
+    {{ include('back/pages/category/_form.html.twig') }}
+
+{% endblock %}

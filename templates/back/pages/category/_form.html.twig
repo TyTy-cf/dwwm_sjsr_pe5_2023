@@ -1,0 +1,11 @@
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+<div class="mx-auto col-8">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">
+        {{ button_label|default('common.button.confirm'|trans) }}
+    </button>
+    {{ form_end(form) }}
+</div>

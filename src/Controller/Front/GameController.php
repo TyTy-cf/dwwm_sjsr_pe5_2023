@@ -5,9 +5,11 @@ namespace App\Controller\Front;
 use App\Entity\Category;
 use App\Entity\Game;
 use App\Repository\CategoryRepository;
+use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -44,6 +46,29 @@ class GameController extends AbstractController
             $this->translator->trans('pages.error')
         );
         return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/disponible/{slug}', name: 'available_by_language')]
+    public function availablebByLanguage(
+        string $slug, // $request->get('slug')
+        CountryRepository $countryRepository
+    ): Response {
+        $country = $countryRepository->findOneBy(['slug' => $slug]);
+
+        if ($country === null) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans('pages.error')
+            );
+            return $this->redirectToRoute('app_home');
+        }
+
+        $games = $this->gameRepository->findByCountry($country);
+
+        return $this->render('front/pages/game/list_by_category.html.twig', [
+           'country' => $country,
+           'games' => $games,
+        ]);
     }
 
     private function show(Game $game): Response
