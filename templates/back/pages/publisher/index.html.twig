@@ -4,7 +4,6 @@
     {{ 'back.pages.publisher.index.title'|trans }}
 {% endblock %}
 
-
 {% block body %}
 
     <div class="d-flex my-4">
@@ -36,7 +35,7 @@
                         {{ publisher.website }}
                     </a>
                 </td>
-                <td>{{ publisher.createdAt ? publisher.createdAt|date('Y-m-d') : '' }}</td>
+                <td>{{ publisher.createdAt ? publisher.createdAt|date('d-m-Y') : '' }}</td>
                 <td>
                     <img src="{{ publisher.country.urlFlag }}">
                 </td>

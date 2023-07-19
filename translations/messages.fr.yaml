@@ -124,6 +124,23 @@ back:
             createdAt: "Inscrit le"
             games: "Nb jeux"
             total_spent: "Total dépensé"
+    game:
+      index:
+        title: "Les jeux"
+        table:
+          header:
+            name: "Nom"
+            price: "Prix"
+            published_at: "Sortie le"
+            publisher: "Editeur"
+            countries: "Langues disponibles"
+            categories: "Catégories"
+      show:
+        title: "Détail du jeu : %game%"
+      new:
+        title: "Ajouter un jeu"
+      edit:
+        title: "Modifier %game%"
   common:
     table:
       header:
@@ -140,6 +157,9 @@ back:
       new: "Ajouter un éditeur"
     user:
       index: "Les utilisateurs"
+    game:
+      index: "Les jeux"
+      new: "Ajouter un jeu"
 
 common:
   button:

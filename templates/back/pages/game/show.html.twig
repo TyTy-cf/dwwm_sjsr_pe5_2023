@@ -1,0 +1,89 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ 'back.pages.game.show.title'|trans({'%game%': game.name }) }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <a class="main-link my-auto me-3" href="{{ path('app_admin_game_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1>{{ 'back.pages.game.show.title'|trans({'%game%': game.name }) }}</h1>
+        <a class="main-link my-auto ms-5"
+           href="{{ path('app_admin_game_edit', {'slug': game.slug}) }}"
+           title="{{ 'common.title.edit'|trans }}"
+        >
+            <i class="fa fa-pen fa-2x"></i>
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <div class="container-image-game-show">
+                <img src="{{ game.thumbnailCover }}">
+            </div>
+        </div>
+        <div class="col-8">
+            <table class="table table-dark table-striped">
+                <tbody>
+                <tr>
+                    <th>{{ 'back.pages.game.index.table.header.price'|trans }}</th>
+                    <td>{{ game.price }}€</td>
+                </tr>
+                <tr>
+                    <th>{{ 'back.pages.game.index.table.header.published_at'|trans }}</th>
+                    <td>{{ game.publishedAt ? game.publishedAt|date('d-m-Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'back.pages.game.index.table.header.countries'|trans }}</th>
+                    <td>
+                        <div class="d-flex">
+                            {% for country in game.countries %}
+                                <img src="{{ country.urlFlag }}"
+                                     alt="{{ country.name }}"
+                                     title="{{ country.nationality }}"
+                                     {% if not loop.last %}class="me-1"{% endif %}
+                                >
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'back.pages.game.index.table.header.publisher'|trans }}</th>
+                    <td>
+                        {% if game.publisher is not null %}
+                            <a href="{{ path('app_admin_publisher_show', {'slug': game.publisher.slug}) }}">
+                                {{ game.publisher.name }}
+                            </a>
+                        {% else %}
+                            Non renseigné
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'back.pages.game.index.table.header.categories'|trans }}</th>
+                    <td>
+                        <div class="d-flex">
+                            {% for category in game.categories %}
+                                <a class="main-link" href="{{ path('app_admin_category_show', {'slug': category.slug}) }}">
+                                    {{ category.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="my-5">Description actuelle :</h3>
+
+        {{ game.description|raw }}
+
+    </div>
+
+{% endblock %}

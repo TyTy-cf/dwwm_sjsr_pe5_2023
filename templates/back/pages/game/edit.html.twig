@@ -1,0 +1,21 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ 'back.pages.game.edit.title'|trans({'%game%': game.name }) }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <a class="main-link my-auto me-3" href="{{ path('app_admin_game_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1>
+            {{ 'back.pages.game.edit.title'|trans({'%game%': game.name }) }}
+        </h1>
+        {{ include('back/pages/game/_delete_form.html.twig') }}
+    </div>
+
+    {{ include('back/pages/game/_form.html.twig', {'button_label': 'common.button.confirm'|trans}) }}
+
+{% endblock %}
