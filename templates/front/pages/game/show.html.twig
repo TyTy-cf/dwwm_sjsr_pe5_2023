@@ -74,10 +74,11 @@
             <h2>Les commentaires</h2>
             <div class="row">
                 {% for review in game.reviews %}
-                    <div class="col-md-3">
-                        {{ review.content }}
-                        <p>Par <span class="fw-bold">{{ review.user.name }}</span></p>
-                    </div>
+                    {% include 'front/partial/_review_card.html.twig' with
+                        {
+                            'fromShow': true
+                        }
+                    %}
                 {% endfor %}
             </div>
         </div>

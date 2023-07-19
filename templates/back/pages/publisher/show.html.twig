@@ -1,0 +1,50 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ 'back.pages.publisher.show.title'|trans({'%publisher%': publisher.name }) }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <a class="main-link my-auto me-3" href="{{ path('app_admin_publisher_index') }}">
+            <i class="fa fa-arrow-left fa-2x"></i>
+        </a>
+        <h1>{{ 'back.pages.publisher.show.title'|trans({'%publisher%': publisher.name }) }}</h1>
+        <a class="main-link my-auto ms-5"
+           href="{{ path('app_admin_publisher_edit', {'slug': publisher.slug}) }}"
+           title="{{ 'common.title.edit'|trans }}"
+        >
+            <i class="fa fa-pen fa-2x"></i>
+        </a>
+    </div>
+
+    <table class="table table-dark table-striped">
+        <tbody>
+            <tr>
+                <th>{{ 'back.pages.publisher.index.table.header.name'|trans }}</th>
+                <td>{{ publisher.name }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'back.pages.publisher.index.table.header.website'|trans }}</th>
+                <td>
+                    <a href="{{ publisher.website }}" target="_blank">
+                        {{ publisher.website }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>{{ 'back.pages.publisher.index.table.header.created_at'|trans }}</th>
+                <td>{{ publisher.createdAt ? publisher.createdAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'back.pages.publisher.index.table.header.slug'|trans }}</th>
+                <td>{{ publisher.slug }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'back.pages.publisher.index.table.header.country'|trans }}</th>
+                <td><img src="{{ publisher.country.urlFlag }}"></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

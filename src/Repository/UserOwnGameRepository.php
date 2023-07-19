@@ -39,28 +39,24 @@ class UserOwnGameRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return UserOwnGame[] Returns an array of UserOwnGame objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findTotalBenefit(): int
+    {
+        return $this->createQueryBuilder('uog')
+            ->select('SUM(g.price)')
+            ->join('uog.game', 'g')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
-//    public function findOneBySomeField($value): ?UserOwnGame
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findBenefitForLastYear(int $limit = 4): array
+    {
+        return $this->createQueryBuilder('uog')
+            ->select('SUM(g.price) as total', 'YEAR(uog.createdAt) as year')
+            ->join('uog.game', 'g')
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

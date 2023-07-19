@@ -54,3 +54,27 @@
 </div>
 
 <hr>
+
+<div class="menu">
+    <h4>Editeurs</h4>
+    <ul class="list-unstyled ps-4">
+        <li>
+            {% include 'back/common/_menu_link.html.twig' with
+                {
+                    'label': 'back.menu.publisher.index'|trans,
+                    'pagePath': path('app_admin_publisher_index')
+                }
+            %}
+        </li>
+        <li>
+            {% include 'back/common/_menu_link.html.twig' with
+                {
+                    'label': 'back.menu.publisher.new'|trans,
+                    'pagePath': path('app_admin_publisher_new')
+                }
+            %}
+        </li>
+    </ul>
+</div>
+
+<hr>

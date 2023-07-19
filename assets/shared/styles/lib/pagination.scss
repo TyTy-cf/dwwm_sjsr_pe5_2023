@@ -22,7 +22,7 @@
       background-color: lighten($main-color, 10%);
 
       &:hover {
-        background-color:  lighten($main-color, 20%);
+        background-color:  lighten($orange, 20%);
         box-shadow: lighten($main-color, 20%) 0 0 0.2em;
       }
     }

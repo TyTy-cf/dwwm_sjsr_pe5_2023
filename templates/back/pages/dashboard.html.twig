@@ -1,0 +1,118 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ 'back.pages.dashboard.title'|trans }}</h1>
+
+    <h2 class="my-5">
+        {{ 'back.pages.dashboard.benefits'|trans }}{{ benefits }}€
+    </h2>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <h3>{{ 'back.pages.dashboard.last_users'|trans }}</h3>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Pays</th>
+                        <th>Nom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            {% if user.country is not null %}
+                                <img src="{{ user.country.urlFlag }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a  class="main-link"
+                                href="{{ path('app_profile_show', {'name': user.name}) }}">
+                                {{ user.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h3>{{ 'back.pages.dashboard.last_bought'|trans }}</h3>
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for game in games %}
+                    <tr>
+                        <td>
+                            {{ game.name }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <h3>{{ 'back.pages.dashboard.last_reviews'|trans }}</h3>
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Jeu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for review in reviews %}
+                    <tr>
+                        <td>
+                            <a  class="main-link"
+                                href="{{ path('app_profile_show', {'name': review.user.name}) }}">
+                                {{ review.user.name }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ review.game.name }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h3>{{ 'back.pages.dashboard.last_year_benefit'|trans }}</h3>
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Année</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for benefitByYear in lastBenefitByYear %}
+                    <tr>
+                        <td>
+                            {{ benefitByYear['year'] }}
+                        </td>
+                        <td>
+                            {{ benefitByYear['total'] }}€
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    {{ 'back.pages.dashboard.title'|trans }}
+{% endblock %}
+

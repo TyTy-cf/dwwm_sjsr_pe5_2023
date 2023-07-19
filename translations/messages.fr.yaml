@@ -46,12 +46,14 @@ form:
       label: "Pseudo"
     country:
       label: "Pays"
+  publisher:
+    name:
+      label: "Nom"
+    website:
+      label: "Site web"
+    created_at:
+      label: "Fondé le"
 
-common:
-  button:
-    confirm: "Valider"
-    cancel: "Annuler"
-    delete: "Supprimer"
   title:
     edit: "Modifier"
     add: "Ajouter"
@@ -87,6 +89,29 @@ back:
         title: "Catégorie : %category%"
       edit:
         title: "Modifier %category%"
+    dashboard:
+      title: "Dashboard"
+      benefits: "Bénéfice total : "
+      last_users: "Les dernières inscriptions"
+      last_bought: "Les derniers achats"
+      last_reviews: "Les derniers commentaires"
+      last_year_benefit: "Les dernières années"
+    publisher:
+      index:
+        title: "Les éditeurs"
+        table:
+          header:
+            name: "Nom"
+            website: "Site web"
+            country: "Origine"
+            created_at: "Fondé le"
+            slug: "Slug"
+      new:
+        title: "Ajouter un éditeur"
+      show:
+        title: "Editeur : %publisher%"
+      edit:
+        title: "Modifier : %publisher%"
   common:
     table:
       header:
@@ -98,3 +123,12 @@ back:
     category:
       index: "Les catégories"
       new: "Ajouter une catégorie"
+    publisher:
+      index: "Les éditeurs"
+      new: "Ajouter un éditeur"
+
+common:
+  button:
+    confirm: "Valider"
+    cancel: "Annuler"
+    delete: "Supprimer"

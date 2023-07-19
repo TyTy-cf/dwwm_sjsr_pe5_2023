@@ -1,8 +1,10 @@
 
-<div class="col-3">
-    <a class="main-link game-title" href="{{ path('app_game_redirect', {'slug': review.game.slug}) }}">
-        {{ review.game.name }}
-    </a>
+<div class="col-3 mt-4">
+    {% if fromShow is not defined %}
+        <a class="main-link game-title" href="{{ path('app_game_redirect', {'slug': review.game.slug}) }}">
+            {{ review.game.name }}
+        </a>
+    {% endif %}
     <div>
         {% if review.rating > 0 %}
             {% for i in 1..review.rating %}
@@ -15,4 +17,14 @@
     Par <a class="main-link" href="{{ path('app_profile_show', {'name': review.user.name}) }}">
         {{ review.user.name }}
     </a>, le {{ review.createdAt|date('d/m/Y') }}
+    {% if fromShow is defined %}
+        <div>
+            <span class="feedback-green">
+                <i class="fa fa-thumbs-up"></i> {{ review.upVote }}
+            </span>
+                <span class="feedback-red">
+                <i class="fa fa-thumbs-down"></i> {{ review.downVote }}
+            </span>
+        </div>
+    {% endif %}
 </div>

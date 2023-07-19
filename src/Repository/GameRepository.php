@@ -107,6 +107,7 @@ class GameRepository extends ServiceEntityRepository
         return $this->getQbAll()
             ->where('g.slug = :slug')
             ->setParameter('slug', $slug)
+            ->orderBy('r.createdAt', 'DESC')
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -151,6 +152,22 @@ class GameRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    public function findLastBoughtGames(int $limit = 4): array
+    {
+        return $this->createQueryBuilder('g')
+            ->join(
+                UserOwnGame::class,
+                'uog',
+                Join::WITH,
+                'uog.game = g'
+            )
+            ->orderBy('uog.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 }
