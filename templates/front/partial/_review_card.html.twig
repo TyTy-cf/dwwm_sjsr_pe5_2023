@@ -1,6 +1,6 @@
 
 <div class="col-3 mt-4">
-    {% if fromShow is not defined %}
+    {% if fromGameShow is not defined %}
         <a class="main-link game-title" href="{{ path('app_game_redirect', {'slug': review.game.slug}) }}">
             {{ review.game.name }}
         </a>
@@ -14,17 +14,16 @@
     </div>
     <p data-hidden="review[content]-{{ review.id }}">{{ review.content|excerpt }}</p>
     <p data-hidden="review[content]-{{ review.id }}" class="d-none">{{ review.content }}</p>
+    {% if fromUserShow is not defined %}
     Par <a class="main-link" href="{{ path('app_profile_show', {'name': review.user.name}) }}">
         {{ review.user.name }}
-    </a>, le {{ review.createdAt|date('d/m/Y') }}
-    {% if fromShow is defined %}
-        <div>
-            <span class="feedback-green">
-                <i class="fa fa-thumbs-up"></i> {{ review.upVote }}
-            </span>
-                <span class="feedback-red">
-                <i class="fa fa-thumbs-down"></i> {{ review.downVote }}
-            </span>
-        </div>
-    {% endif %}
+    </a>,{% endif %} le {{ review.createdAt|date('d/m/Y') }}
+    <div>
+        <span class="feedback-green">
+            <i class="fa fa-thumbs-up"></i> {{ review.upVote }}
+        </span>
+            <span class="feedback-red">
+            <i class="fa fa-thumbs-down"></i> {{ review.downVote }}
+        </span>
+    </div>
 </div>

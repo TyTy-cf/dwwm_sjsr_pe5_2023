@@ -52,19 +52,36 @@
         </div>
     </div>
 
-    <h1 class="mt-5">Ses jeux</h1>
-    <div class="row">
-        {% for uog in user.userOwnGames %}
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <p class="m-0 text-center">{{ uog.gameTime|time_converter }}</p>
-                {% include 'front/partial/_game_card.html.twig' with
-                    {
-                        'game': uog.game,
-                        'containerClass': 'col-lg-12'
-                    }
-                %}
+    {% if user.userOwnGames|length > 0 %}
+        <h1 class="mt-5">Ses jeux</h1>
+        <div class="row">
+            {% for uog in user.userOwnGames %}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <p class="m-0 text-center">{{ uog.gameTime|time_converter }}</p>
+                    {% include 'front/partial/_game_card.html.twig' with
+                        {
+                            'game': uog.game,
+                            'containerClass': 'col-lg-12'
+                        }
+                    %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if user.reviews|length > 0 %}
+        <div class="mt-5">
+            <h2>Ses commentaires</h2>
+            <div class="row">
+                {% for review in user.reviews %}
+                    {% include 'front/partial/_review_card.html.twig' with
+                        {
+                            'fromUserShow': true
+                        }
+                    %}
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endif %}
 
 {% endblock %}
