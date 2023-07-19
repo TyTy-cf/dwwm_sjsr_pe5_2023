@@ -112,6 +112,18 @@ back:
         title: "Editeur : %publisher%"
       edit:
         title: "Modifier : %publisher%"
+    user:
+      index:
+        title: "Les utilisateurs"
+        table:
+          header:
+            flag: "Origine"
+            name: "Nom"
+            email: "Email"
+            nickname: "Pseudo"
+            createdAt: "Inscrit le"
+            games: "Nb jeux"
+            total_spent: "Total dépensé"
   common:
     table:
       header:
@@ -126,6 +138,8 @@ back:
     publisher:
       index: "Les éditeurs"
       new: "Ajouter un éditeur"
+    user:
+      index: "Les utilisateurs"
 
 common:
   button:

@@ -339,6 +339,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $hours. 'h' . $minutes;
     }
 
+    #[Groups(['user:item'])]
+    public function getTotalAmountSpent(): float {
+        $totalAmountSpent = 0;
+        foreach ($this->userOwnGames as $userOwnGame) {
+            /** @var UserOwnGame $userOwnGame */
+            $totalAmountSpent += $userOwnGame->getGame()->getPrice();
+        }
+        return $totalAmountSpent;
+    }
+
+
     /**
      * @return ArrayCollection|Collection
      */

@@ -1,5 +1,9 @@
 {% extends 'front/base.html.twig' %}
 
+{% block title %}
+    Profil de {{ user.name }}
+{% endblock %}
+
 {% block body %}
 
     {% include 'front/partial/_flashes.html.twig' %}

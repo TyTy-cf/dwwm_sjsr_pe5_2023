@@ -1,0 +1,50 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+
+    <div class="d-flex my-4">
+        <h1 class="my-auto">{{ 'back.pages.user.index.title'|trans }}</h1>
+    </div>
+
+    <table class="table table-striped table-hover table-dark">
+        <thead>
+        <tr>
+            <th>{{ 'back.pages.user.index.table.header.flag'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.name'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.email'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.nickname'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.createdAt'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.games'|trans }}</th>
+            <th>{{ 'back.pages.user.index.table.header.total_spent'|trans }}</th>
+            <th>{{ 'back.common.table.header.action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    {% if user.country is not null %}
+                        <img src="{{ user.country.urlFlag }}" alt="{{ user.country.name }}">
+                    {% endif %}
+                </td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nickname }}</td>
+                <td>{{ user.createdAt|date('Y-m-d') }}</td>
+                <td>{{ user.userOwnGames|length }}</td>
+                <td>{{ user.totalAmountSpent }}€</td>
+                <td>
+                    <a class="main-link my-auto me-1"
+                       href="{{ path('app_profile_show', {'name': user.name}) }}"
+                       title="{{ 'common.title.see'|trans }}"
+                       target="_blank"
+                    >
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
