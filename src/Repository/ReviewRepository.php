@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Game;
 use App\Entity\Review;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Utils;
 
 /**
  * @extends ServiceEntityRepository<Review>
@@ -59,4 +60,20 @@ class ReviewRepository extends ServiceEntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param Game $game
+     * @return QueryBuilder
+     */
+    public function getQbByGame(Game $game): QueryBuilder
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r', 'u')
+            ->join('r.game', 'g')
+            ->join('r.user', 'u')
+            ->where('g = :game')
+            ->setParameter('game', $game)
+            ->orderBy('r.createdAt', 'DESC');
+    }
+
 }

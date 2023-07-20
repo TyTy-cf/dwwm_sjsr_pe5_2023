@@ -5,6 +5,15 @@ body {
   overflow-x: hidden;
 }
 
+.icon-click {
+  cursor: pointer;
+  color: red;
+
+  &:hover {
+    color: $orange;
+  }
+}
+
 .test-container {
   background-color: deeppink;
 }

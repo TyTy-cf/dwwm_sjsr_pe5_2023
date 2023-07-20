@@ -48,10 +48,8 @@ class GameRepository extends ServiceEntityRepository
 
     public function getQbAll(): QueryBuilder {
         return $this->createQueryBuilder('g')
-            ->select('g', 'categ', 'r', 'c', 'u')
+            ->select('g', 'categ', 'c')
             ->leftJoin('g.categories', 'categ')
-            ->leftJoin('g.reviews', 'r')
-            ->leftJoin('r.user', 'u')
             ->leftJoin('g.countries', 'c');
     }
 
@@ -107,7 +105,6 @@ class GameRepository extends ServiceEntityRepository
         return $this->getQbAll()
             ->where('g.slug = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('r.createdAt', 'DESC')
             ->getQuery()
             ->getOneOrNullResult();
     }

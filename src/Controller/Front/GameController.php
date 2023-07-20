@@ -7,7 +7,9 @@ use App\Entity\Game;
 use App\Repository\CategoryRepository;
 use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,18 +23,20 @@ class GameController extends AbstractController
     public function __construct(
         private GameRepository $gameRepository,
         private TranslatorInterface $translator,
-        private CategoryRepository $categoryRepository
+        private CategoryRepository $categoryRepository,
+        private ReviewRepository $reviewRepository,
+        private PaginatorInterface $paginator
     ) { }
 
     /**
      * @throws NonUniqueResultException
      */
     #[Route('/{slug}', name: 'redirect')]
-    public function handleRedirection(string $slug): Response {
+    public function handleRedirection(string $slug, Request $request): Response {
         $game = $this->gameRepository->findFullOneBy($slug);
 
         if ($game !== null) {
-            return $this->show($game);
+            return $this->show($game, $request);
         }
 
         $category = $this->categoryRepository->findOneBy(['slug' => $slug]);
@@ -71,12 +75,18 @@ class GameController extends AbstractController
         ]);
     }
 
-    private function show(Game $game): Response
+    private function show(Game $game, Request $request): Response
     {
         $relatedGames = $this->gameRepository->findByRelatedCategory($game, 6);
+        $reviews = $this->paginator->paginate(
+            $this->reviewRepository->getQbByGame($game),
+            $request->query->getInt('page', 1),
+            8
+        );
 
         return $this->render('front/pages/game/show.html.twig', [
             'game' => $game,
+            'reviews' => $reviews,
             'relatedGames' => $relatedGames,
         ]);
     }

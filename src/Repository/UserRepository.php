@@ -67,13 +67,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     public function getQbAll(): QueryBuilder {
-        return $this->createQueryBuilder('u')
+        return $this->getQb()
             ->select('u', 'c', 'user_own_games', 'game', 'r', 'rgame')
-            ->leftJoin('u.userOwnGames', 'user_own_games')
-            ->leftJoin('user_own_games.game', 'game')
             ->leftJoin('u.reviews', 'r')
-            ->leftJoin('r.game', 'rgame')
-            ->leftJoin('u.country', 'c');
+            ->leftJoin('r.game', 'rgame');
     }
 
     /**

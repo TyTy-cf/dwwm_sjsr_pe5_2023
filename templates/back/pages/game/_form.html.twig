@@ -1,37 +1,37 @@
 
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-<div class="mx-auto col-8">
+<div class="mx-auto col-10">
     {{ form_start(form) }}
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             {{ form_row(form.name) }}
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12 sol-sm-12">
             <div class="row">
-                <div class="col-7">
+                <div class="col-lg-7 col-md-7">
                     {{ form_row(form.publishedAt) }}
                 </div>
-                <div class="col-5">
+                <div class="col-lg-5 col-md-5">
                     {{ form_row(form.price) }}
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 sol-sm-12">
             {{ form_row(form.publisher) }}
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 sol-sm-12">
             {{ form_row(form.thumbnailCover) }}
         </div>
     </div>
     <div class="row my-3">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 sol-sm-12">
             {{ form_row(form.categories) }}
             {{ form_widget(form.addCategory) }}
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 sol-sm-12">
             {{ form_row(form.countries) }}
             {{ form_widget(form.addCountry) }}
         </div>

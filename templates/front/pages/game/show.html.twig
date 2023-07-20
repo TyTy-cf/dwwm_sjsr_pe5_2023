@@ -45,41 +45,38 @@
         </div>
 
         <div class="mt-5">
-            <div class="row">
-                <div class="col-7">
-                    <h2>A propos du jeu</h2>
-                    <p>{{ game.description|raw }}</p>
-                </div>
-                <div class="col-1">
-                </div>
-                <div class="col-4">
-                    <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
-                    <div>
-                        <p>{{ 'pages.game.show.categories'|trans }}</p>
-                        <ul class="list-unstyled">
-                            {% for category in game.categories %}
-                                <li>
-                                    <a class="main-link" href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
-                                        {{ category.name }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
+            <p>Date de publication : {{ game.publishedAt|date('d/m/Y') }}</p>
+            <div>
+                <p>{{ 'pages.game.show.categories'|trans }}</p>
+                <ul class="list-unstyled">
+                    {% for category in game.categories %}
+                        <li>
+                            <a class="main-link" href="{{ path('app_game_redirect', {'slug': category.slug}) }}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h2>A propos du jeu</h2>
+                <p>{{ game.description|raw }}</p>
             </div>
         </div>
 
         <div class="mt-5">
             <h2>Les commentaires</h2>
             <div class="row">
-                {% for review in game.reviews %}
+                {% for review in reviews %}
                     {% include 'front/partial/_review_card.html.twig' with
                         {
                             'fromGameShow': true
                         }
                     %}
                 {% endfor %}
+                <div class="navigation d-flex justify-content-center mt-4">
+                    {{ knp_pagination_render(reviews) }}
+                </div>
             </div>
         </div>
 
