@@ -3,7 +3,41 @@
 
 <div class="mx-auto col-8">
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-7">
+                    {{ form_row(form.publishedAt) }}
+                </div>
+                <div class="col-5">
+                    {{ form_row(form.price) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.publisher) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.thumbnailCover) }}
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-6">
+            {{ form_row(form.categories) }}
+            {{ form_widget(form.addCategory) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.countries) }}
+            {{ form_widget(form.addCountry) }}
+        </div>
+    </div>
+    {{ form_row(form.description) }}
+
     <button class="btn btn-primary">
         {{ 'common.button.confirm'|trans }}
     </button>

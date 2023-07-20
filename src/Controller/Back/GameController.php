@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/game', name: 'app_admin_game_')]
+#[Route('/admin/jeu', name: 'app_admin_game_')]
 class GameController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -31,7 +31,7 @@ class GameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $gameRepository->save($game, true);
 
-            return $this->redirectToRoute('app_game_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_game_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/pages/game/new.html.twig', [

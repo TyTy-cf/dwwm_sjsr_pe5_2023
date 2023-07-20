@@ -53,6 +53,23 @@ form:
       label: "Site web"
     created_at:
       label: "Fondé le"
+  game:
+    name:
+      label: "Nom"
+    price:
+     label: "Prix"
+    description:
+      label: "Description"
+    published_at:
+      label: "Sortie le"
+    thumbnail_cover:
+      label: "Image de couverture"
+    publisher:
+      label: "Editeur"
+    categories:
+      label: "Catégories"
+    countries:
+      label: "Langues disponibles"
 
   title:
     edit: "Modifier"
