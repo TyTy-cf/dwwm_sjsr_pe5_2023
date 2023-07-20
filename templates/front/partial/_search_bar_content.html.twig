@@ -1,0 +1,14 @@
+
+<div class="searchbar-result ps-2">
+    <p>Jeux</p>
+    <ul class="list-unstyled">
+        {% for game in games %}
+            <li>
+                <a class="main-link" href="{{ path('app_game_redirect', {'slug': game.slug}) }}">
+                    {{ game.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <hr>
+</div>

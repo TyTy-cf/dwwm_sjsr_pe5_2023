@@ -170,4 +170,14 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByApproxSearch(string $searched): array
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.name LIKE :searched')
+            ->setParameter('searched', '%'.$searched.'%')
+            ->orderBy('g.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
