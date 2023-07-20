@@ -1,5 +1,5 @@
 
-window.addEventListener('load', function () {
+function initCollectionForm(): void {
     const buttonsAddForm: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-btn-selector]');
     if (buttonsAddForm) {
         buttonsAddForm.forEach((btnElt) => {
@@ -17,6 +17,10 @@ window.addEventListener('load', function () {
             });
         });
     }
+}
+
+window.addEventListener('load', () => {
+    initCollectionForm();
 });
 
 
