@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use App\Service\TextService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +23,18 @@ class GameController extends AbstractController
     }
 
     #[Route('/nouveau', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, GameRepository $gameRepository): Response
+    public function new(
+        Request $request,
+        GameRepository $gameRepository,
+        TextService $textService
+    ): Response
     {
         $game = new Game();
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $game->setSlug($textService->slugify($game->getName()));
             $gameRepository->save($game, true);
 
             return $this->redirectToRoute('app_admin_game_index', [], Response::HTTP_SEE_OTHER);
@@ -49,12 +55,18 @@ class GameController extends AbstractController
     }
 
     #[Route('/{slug}/modifier', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Game $game, GameRepository $gameRepository): Response
+    public function edit(
+        Request $request,
+        Game $game,
+        GameRepository $gameRepository,
+        TextService $textService
+    ): Response
     {
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $game->setSlug($textService->slugify($game->getName()));
             $gameRepository->save($game, true);
 
             return $this->redirectToRoute('app_admin_game_index');
