@@ -9,11 +9,51 @@
     <table class="table table-striped table-hover table-dark">
         <thead>
         <tr>
-            <th>{{ 'back.pages.user.index.table.header.flag'|trans }}</th>
-            <th>{{ 'back.pages.user.index.table.header.name'|trans }}</th>
-            <th>{{ 'back.pages.user.index.table.header.email'|trans }}</th>
-            <th>{{ 'back.pages.user.index.table.header.nickname'|trans }}</th>
-            <th>{{ 'back.pages.user.index.table.header.createdAt'|trans }}</th>
+            <th>
+                {{
+                    knp_pagination_sortable(
+                        users,
+                        'back.pages.user.index.table.header.flag'|trans,
+                        'c.name'
+                    )|raw
+                }}
+            </th>
+            <th>
+                {{
+                    knp_pagination_sortable(
+                        users,
+                        'back.pages.user.index.table.header.name'|trans,
+                        'u.name'
+                    )|raw
+                }}
+            </th>
+            <th>
+                {{
+                    knp_pagination_sortable(
+                        users,
+                        'back.pages.user.index.table.header.email'|trans,
+                        'u.email'
+                    )|raw
+                }}
+            </th>
+            <th>
+                {{
+                knp_pagination_sortable(
+                    users,
+                    'back.pages.user.index.table.header.nickname'|trans,
+                    'u.nickname'
+                )|raw
+                }}
+            </th>
+            <th>
+                {{
+                    knp_pagination_sortable(
+                        users,
+                        'back.pages.user.index.table.header.createdAt'|trans,
+                        'u.createdAt'
+                    )|raw
+                }}
+            </th>
             <th>{{ 'back.pages.user.index.table.header.games'|trans }}</th>
             <th>{{ 'back.pages.user.index.table.header.total_spent'|trans }}</th>
             <th>{{ 'back.common.table.header.action'|trans }}</th>
@@ -46,5 +86,9 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation d-flex justify-content-center mt-2">
+        {{ knp_pagination_render(users) }}
+    </div>
 
 {% endblock %}

@@ -7,8 +7,8 @@
     border-radius: 3rem;
     text-decoration: none;
     padding: 0.3rem 1rem;
-    background-color: lighten($main-color, 25%);
-    box-shadow: lighten($main-color, 20%) 0 0 0.2em;
+    background-color: $orange;
+    box-shadow: lighten($orange, 20%) 0 0 0.2em;
   }
 
   .page, .first, .last, .previous, .next {
@@ -19,11 +19,11 @@
       border-radius: 3rem;
       text-decoration: none;
       padding: 0.3rem 1rem;
-      background-color: lighten($main-color, 10%);
+      background-color: $footer-background-color;
 
       &:hover {
-        background-color:  lighten($orange, 20%);
-        box-shadow: lighten($main-color, 20%) 0 0 0.2em;
+        background-color:  $orange;
+        box-shadow: lighten($orange, 20%) 0 0 0.2em;
       }
     }
   }
