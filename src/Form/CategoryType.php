@@ -25,7 +25,8 @@ class CategoryType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class,[
-                'required' => false,
+                'required' => !$options['is_edit'],
+                'mapped' => false,
                 'constraints' => [
                     new File(
                         mimeTypes: ['image/apng', 'image/jpeg'],
@@ -40,6 +41,7 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
+            'is_edit' => false,
         ]);
     }
 }

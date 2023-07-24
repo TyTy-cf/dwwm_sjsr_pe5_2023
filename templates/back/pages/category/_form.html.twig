@@ -3,9 +3,16 @@
 
 <div class="mx-auto col-8">
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">
-        {{ button_label|default('common.button.confirm'|trans) }}
-    </button>
+        {{ form_row(form.name) }}
+        {% if category.image is not null %}
+            <p>Image actuelle :</p>
+            <img src="{{ category.image }}"
+                 class="col-2 img-fluid"
+            >
+        {% endif %}
+        {{ form_row(form.image) }}
+        <button class="btn btn-primary">
+            {{ button_label|default('common.button.confirm'|trans) }}
+        </button>
     {{ form_end(form) }}
 </div>

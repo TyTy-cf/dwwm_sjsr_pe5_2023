@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\FileUploader;
 use App\Service\TextService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/categorie', name: 'app_admin_category_')]
 class CategoryController extends AbstractController
 {
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
@@ -26,7 +28,7 @@ class CategoryController extends AbstractController
     public function new(
         Request $request,
         CategoryRepository $categoryRepository,
-        TextService $textService
+        FileUploader $fileUploader
     ): Response
     {
         $category = new Category();
@@ -34,6 +36,14 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('image')->getData() !== null) {
+                $category->setImage(
+                    $fileUploader->uploadFile(
+                        $form->get('image')->getData(), // => UploadedFile
+                        '/category'
+                    )
+                );
+            }
             $categoryRepository->save($category, true);
 
             return $this->redirectToRoute('app_admin_category_index');
@@ -58,13 +68,21 @@ class CategoryController extends AbstractController
         Request $request,
         Category $category,
         CategoryRepository $categoryRepository,
-        TextService $textService
+        FileUploader $fileUploader
     ): Response
     {
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryType::class, $category, ['is_edit' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('image')->getData() !== null) {
+                $category->setImage(
+                    $fileUploader->uploadFile(
+                        $form->get('image')->getData(),
+                        '/category'
+                    )
+                );
+            }
             $categoryRepository->save($category, true);
 
             return $this->redirectToRoute('app_admin_category_index');
