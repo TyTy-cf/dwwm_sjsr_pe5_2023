@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         'put',
     ],
 )]
-class Category
+class Category implements SlugInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -76,7 +76,7 @@ class Category
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

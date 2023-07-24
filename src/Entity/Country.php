@@ -30,7 +30,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'nationality' => 'partial',
     ],
 )]
-class Country
+class Country implements SlugInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -103,7 +103,11 @@ class Country
         return $this->code;
     }
 
-    public function setCode(string $code): static
+    /**
+     * @param string|null $code
+     * @return Country
+     */
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
@@ -115,7 +119,7 @@ class Country
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

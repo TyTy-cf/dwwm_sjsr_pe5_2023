@@ -34,7 +34,6 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $game->setSlug($textService->slugify($game->getName()));
             $gameRepository->save($game, true);
 
             return $this->redirectToRoute('app_admin_game_index', [], Response::HTTP_SEE_OTHER);
@@ -66,7 +65,6 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $game->setSlug($textService->slugify($game->getName()));
             $gameRepository->save($game, true);
 
             return $this->redirectToRoute('app_admin_game_index');

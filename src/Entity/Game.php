@@ -40,7 +40,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'orderParameterName' => 'order'
     ])
 ]
-class Game
+class Game implements SlugInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -159,7 +159,7 @@ class Game
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

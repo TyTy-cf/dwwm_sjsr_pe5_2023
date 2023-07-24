@@ -18,7 +18,6 @@ class CountryController extends AbstractController
 {
 
     public function __construct(
-        private CountryService $countryService,
         private TranslatorInterface $translator,
         private CountryRepository $countryRepository
     ) { }
@@ -36,12 +35,12 @@ class CountryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->countryService->initEmptyFields($form->getData());
+            $this->countryRepository->save($form->getData(), true);
             $this->addFlash(
             'success',
                 $this->translator->trans('pages.country.success_create')
             );
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_admin_country_index');
         }
 
         return $this->render('back/pages/country/new.html.twig', [
@@ -66,14 +65,12 @@ class CountryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->countryService->initEmptyFields($form->getData());
+            $this->countryRepository->save($country, true);
             $this->addFlash(
                 'success',
                 $this->translator->trans('pages.country.success_edit')
             );
-            return $this->redirectToRoute('app_admin_country_edit', [
-                'slug' => $country->getSlug()
-            ]);
+            return $this->redirectToRoute('app_admin_country_index');
         }
 
         return $this->render('back/pages/country/new.html.twig', [

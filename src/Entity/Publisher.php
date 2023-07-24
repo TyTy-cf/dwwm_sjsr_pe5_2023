@@ -32,7 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
     ]
 )]
-class Publisher
+class Publisher implements SlugInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -155,7 +155,7 @@ class Publisher
         return $this->slug;
     }
 
-    public function setSlug(string $slug): static
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 

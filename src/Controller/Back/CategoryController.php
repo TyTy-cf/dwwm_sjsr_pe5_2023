@@ -34,7 +34,6 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setSlug($textService->slugify($category->getName()));
             $categoryRepository->save($category, true);
 
             return $this->redirectToRoute('app_admin_category_index');
@@ -66,7 +65,6 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setSlug($textService->slugify($category->getName()));
             $categoryRepository->save($category, true);
 
             return $this->redirectToRoute('app_admin_category_index');
