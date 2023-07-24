@@ -28,7 +28,16 @@ bind:
     $uploadsDir: '%env(UPLOAD_DIR)%'
 ```
 
-Les variables $publicUploadsDir & $uploadsDir sont dorénavant des variables injectables dans des controllers ou services
+Les variables $publicUploadsDir & $uploadsDir sont dorénavant des variables injectables dans des controllers ou services :
+
+```php
+public function __construct(
+    private string $publicUploadsDir,
+    private string $uploadsDir
+) { }
+```
+
+
 - A l'intérieur du FileUploader, il faut appeler la méthode "uploadFile" :
 ```php
 public function uploadFile(UploadedFile $uploadedFile, string $dir = ''): string
