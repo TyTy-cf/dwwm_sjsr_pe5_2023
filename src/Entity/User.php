@@ -105,6 +105,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class)]
     private Collection $reviews;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profileImage = null;
+
     public function __construct()
     {
         $this->userOwnGames = new ArrayCollection();
@@ -383,5 +386,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:item', 'user:list'])]
     public function isAdmin(): bool {
         return in_array('ROLE_ADMIN', $this->roles);
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $profileImage): static
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
     }
 }
