@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
@@ -15,7 +18,8 @@ class FileUploader
      */
     public function __construct(
         private string $publicUploadsDir,
-        private string $uploadsDir
+        private string $uploadsDir,
+        private string $publicDir,
     ) { }
 
     /**
@@ -30,6 +34,14 @@ class FileUploader
         $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
         $uploadedFile->move($destination, $newFilename);
         return '/'.$this->uploadsDir.$dir.'/'.$newFilename;
+    }
+
+    public function cleanUnusedFiles(string $oldFile): void {
+        $fs = new Filesystem();
+        $fileName = $this->publicDir . $oldFile;
+        if ($fs->exists($fileName)) {
+            $fs->remove($fileName);
+        }
     }
 
 }

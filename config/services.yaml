@@ -13,6 +13,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $publicUploadsDir: '%kernel.project_dir%/public/%env(UPLOAD_DIR)%'
+            $publicDir: '%kernel.project_dir%/public'
             $uploadsDir: '%env(UPLOAD_DIR)%'
 
     # makes classes in src/ available to be used as services

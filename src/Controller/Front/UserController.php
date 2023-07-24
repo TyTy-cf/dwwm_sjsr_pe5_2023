@@ -54,6 +54,7 @@ class UserController extends AbstractController
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form->get('profileImage')->getData();
             if ($uploadedFile !== null) {
+                $this->fileUploader->cleanUnusedFiles($user->getProfileImage());
                 $user->setProfileImage(
                     $this->fileUploader->uploadFile(
                         $uploadedFile, // => Objet de type UploadedFile
