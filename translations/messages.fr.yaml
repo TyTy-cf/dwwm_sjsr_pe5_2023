@@ -46,6 +46,8 @@ form:
       label: "Pseudo"
     country:
       label: "Pays"
+    profile_image:
+      label: "Image de profil"
   publisher:
     name:
       label: "Nom"

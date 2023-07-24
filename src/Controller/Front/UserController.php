@@ -3,10 +3,15 @@
 namespace App\Controller\Front;
 
 use App\Entity\User;
+use App\Entity\UserOwnGame;
 use App\Form\UserType;
+use App\Repository\UserOwnGameRepository;
 use App\Repository\UserRepository;
+use App\Service\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +24,8 @@ class UserController extends AbstractController
     public function __construct(
         private UserRepository $userRepository,
         private TranslatorInterface $translator,
+        private FileUploader $fileUploader,
+        private EntityManagerInterface $em
     ) { }
 
     /**
@@ -44,6 +51,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form->get('profileImage')->getData();
+            if ($uploadedFile !== null) {
+                $user->setProfileImage(
+                    $this->fileUploader->uploadFile(
+                        $uploadedFile, // => Objet de type UploadedFile
+                        '/user'
+                    )
+                );
+            }
             $this->userRepository->save($user, true);
             $this->addFlash(
                 'success',

@@ -9,7 +9,7 @@ bind:
     $uploadsDir: '%env(UPLOAD_DIR)%'
 ```
 
-Les variables $publicUploadsDir & $uploadsDir sont dorénavant des variables injectables dans des controllers ou services :
+Les variables $publicUploadsDir & $uploadsDir sont dorénavant des variables dans des services :
 
 ```php
 public function __construct(
@@ -44,7 +44,7 @@ public function uploadFile(UploadedFile $uploadedFile, string $dir = ''): string
     'mapped' => false,
     'constraints' => [
         new File(
-            mimeTypes: ['image/apng', 'image/jpeg'],
+            mimeTypes: ['image/png', 'image/jpeg'],
             mimeTypesMessage: 'Déposer seulement un .jpg ou .png'
         )
     ]
@@ -54,15 +54,20 @@ public function uploadFile(UploadedFile $uploadedFile, string $dir = ''): string
 Bien mettre le champ à "required" false et "mapped" false
 (Afin qu'il ne soit plus traité directement par Symfony, l'intérêt aussi est que si l'utilisateur ne dépose pas de fichier alors le champ du form sera à null)
 
+- Injectez le FileUploader fournit, dans le contrôleur où vous souhaitez l'utiliser
 - On vérifit si le fichier existe dans le submit du formulaire, et on appelle le FileUploader (variable : $fileUploader) à ce moment là :
 
 ```php
-if ($form->get('image')->getData() !== null) {
-    $category->setImage(
-        $fileUploader->uploadFile(
-            $form->get('image')->getData(), // => Objet de type UploadedFile
-            '/category'
-        )
-    );
+if ($form->isSubmitted() && $form->isValid()) {
+    /** @var UploadedFile $uploadedFile */
+    $uploadedFile = $form->get('image')->getData();
+    if ($uploadedFile !== null) {
+        $category->setImage(
+            $fileUploader->uploadFile(
+                $uploadedFile, // => UploadedFile
+                '/category'
+            )
+        );
+    }
 }
 ```

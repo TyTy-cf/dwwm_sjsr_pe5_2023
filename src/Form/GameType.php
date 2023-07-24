@@ -15,6 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GameType extends AbstractType
@@ -97,8 +100,17 @@ class GameType extends AbstractType
                     'class' => 'btn btn-primary',
                     'data-btn-selector' => 'country',
                 ]
-            ])
-        ;
+            ]);
+
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
+            $form = $event->getForm();
+
+            $field = $form->get('thumbnailCover');
+            $fieldLink = $form->get('thumbnailCoverLink');
+            if ($field->getData() === null && $fieldLink->getData() === null) {
+                $form->addError(new FormError('MET AU MOINS UNE IMAGE'));
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

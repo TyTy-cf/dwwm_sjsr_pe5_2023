@@ -9,6 +9,9 @@
     {% include 'front/partial/_flashes.html.twig' %}
 
     <h1 class="mt-5">
+        {% if user.profileImage is not null %}
+            <img class="col-1 img-thumbnail" src="{{ user.profileImage }}" alt="Image de {{ user.name }}">
+        {% endif %}
         Profil de {{ user.name }} <img alt="{{ user.country.nationality }}" src="{{ user.country.urlFlag }}">
         <button class="btn btn-warning collapse multi-collapse show float-end"
                 data-bs-toggle="collapse"
@@ -34,6 +37,9 @@
             </div>
             <div>
                 {{ form_row(form.country) }}
+            </div>
+            <div>
+                {{ form_row(form.profileImage) }}
             </div>
             <div class="mt-4">
                 <button class="btn btn-success" type="submit">

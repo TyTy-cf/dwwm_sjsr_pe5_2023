@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Form\CustomType\ImageFileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,15 +25,8 @@ class CategoryType extends AbstractType
                     'placeholder' => 'Nom'
                 ]
             ])
-            ->add('image', FileType::class,[
+            ->add('image', ImageFileType::class,[
                 'required' => !$options['is_edit'],
-                'mapped' => false,
-                'constraints' => [
-                    new File(
-                        mimeTypes: ['image/apng', 'image/jpeg'],
-                        mimeTypesMessage: 'Déposer seulement un .jpg ou .png'
-                    )
-                ]
             ])
         ;
     }
