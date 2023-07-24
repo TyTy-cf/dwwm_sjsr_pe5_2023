@@ -90,7 +90,7 @@ Le principe est d'avoir un fichier de styles et un fichier de script pour le fro
 
 Exemple d'organisations des assets :
 
-![img.png](assets/images/dir.png)
+![](../assets/images/dir.png)
 
 
 - La partie "shared" possède tout ce qui va être en commun aux deux parties, il n'est pas appelé dans le "webpackconfig.js" mais ses main.scss et main.ts seront appelés dans les "front/main.scss" et "back/main.scss", pareil pour les fichiers .ts
