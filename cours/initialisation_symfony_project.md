@@ -111,6 +111,13 @@ Exemple d'organisations des assets :
 (Attention en suivant cette arborescence il faudra retirer la ligne "enableStimulusController" dans le "webpackconfig.js"
 
 
+- Dans le "assets/shared/scripts/main.ts" ajoutez :
+```ts
+import 'bootstrap';
+import '@popperjs/core';
+```
+
+
 Vérifier que tout fonctionne avec un :
 ```
 yarn watch
