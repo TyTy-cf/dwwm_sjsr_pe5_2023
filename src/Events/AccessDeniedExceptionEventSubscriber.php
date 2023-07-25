@@ -31,11 +31,13 @@ class AccessDeniedExceptionEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event->setResponse(
-            new Response(
-                $this->twig->render('front/exception/access_denied.html.twig'),
-                403
-            )
-        );
+        if (false === str_contains($event->getRequest()->getPathInfo(), 'api')) {
+            $event->setResponse(
+                new Response(
+                    $this->twig->render('front/exception/access_denied.html.twig'),
+                    403
+                )
+            );
+        }
     }
 }

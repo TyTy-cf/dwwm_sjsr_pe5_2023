@@ -25,9 +25,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private UserRepository $userRepository
-    )
-    {
-    }
+    ) { }
 
     public function authenticate(Request $request): Passport
     {
@@ -35,15 +33,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $emailOrName);
 
-        $this->userRepository->createQueryBuilder('u')
-            ->where('u.email = :emailOrName')
-            ->orWhere('u.name = :emailOrName')
-            ->setParameter('emailOrName', $emailOrName)
-            ->getQuery()
-            ->getOneOrNullResult();
-
         return new Passport(
-            new UserBadge($emailOrName),
+            new UserBadge($emailOrName, function ($userIdentifier) {
+                return $this->userRepository->findByEmailOrName($userIdentifier);
+            }),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
