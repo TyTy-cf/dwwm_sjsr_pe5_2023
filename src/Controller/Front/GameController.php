@@ -4,6 +4,8 @@ namespace App\Controller\Front;
 
 use App\Entity\Category;
 use App\Entity\Game;
+use App\Entity\Review;
+use App\Form\ReviewType;
 use App\Repository\CategoryRepository;
 use App\Repository\CountryRepository;
 use App\Repository\GameRepository;
@@ -77,6 +79,16 @@ class GameController extends AbstractController
 
     private function show(Game $game, Request $request): Response
     {
+        $review = new Review();
+        $form = $this->createForm(ReviewType::class, $review);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $review->setUser($this->getUser());
+            $review->setGame($game);
+            $this->reviewRepository->save($review, true);
+        }
+
         $relatedGames = $this->gameRepository->findByRelatedCategory($game, 6);
         $reviews = $this->paginator->paginate(
             $this->reviewRepository->getQbByGame($game),
@@ -88,6 +100,7 @@ class GameController extends AbstractController
             'game' => $game,
             'reviews' => $reviews,
             'relatedGames' => $relatedGames,
+            'formReview' => $form->createView(),
         ]);
     }
 

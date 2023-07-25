@@ -14,7 +14,7 @@
             <p class="card-game-name">{{ game.name }}</p>
         </div>
         {% set displayPrice = true %}
-        {% if fromUser is defined %}
+        {% if user is defined %}
             {% if app.user == user %}
                 {% set displayPrice = false %}
             {% endif %}

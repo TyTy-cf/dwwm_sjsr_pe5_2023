@@ -36,7 +36,7 @@
                     {% endif %}
                     <p class="my-4 fs-2 text-center">{{ game.price }}€</p>
                     <div class="w-100 mt-4">
-                        <button class="button-fire fs-3">
+                        <button class="button-fire fs-3" data-buy-game="{{ game.id }}">
                             Acheter
                         </button>
                     </div>
@@ -78,6 +78,28 @@
                     {{ knp_pagination_render(reviews) }}
                 </div>
             </div>
+            {% if app.user %}
+                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                    {{ form_start(formReview) }}
+                        <div class="mt-4">
+                            {{ form_row(formReview.rating) }}
+                        </div>
+                        <div class="my-4">
+                            {{ form_row(formReview.content) }}
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa fa-check"></i>
+                                {{ 'common.button.confirm'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(formReview) }}
+                </div>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="main-link">
+                    Connectez-vous
+                </a>, pour laisser un commentaire !
+            {% endif %}
         </div>
 
         <div class="mt-5">

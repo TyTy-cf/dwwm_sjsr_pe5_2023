@@ -12,16 +12,22 @@
         {% if user.profileImage is not null %}
             <img class="col-1 img-thumbnail" src="{{ user.profileImage }}" alt="Image de {{ user.name }}">
         {% endif %}
-        Profil de {{ user.name }} <img alt="{{ user.country.nationality }}" src="{{ user.country.urlFlag }}">
-        <button class="btn btn-warning collapse multi-collapse show float-end"
-                data-bs-toggle="collapse"
-                data-bs-target=".multi-collapse"
-                aria-expanded="false"
-                aria-controls="button-edit form-profile"
-                id="button-edit"
-        >
-            <i class="fa fa-pen"></i>
-        </button>
+        {% if app.user %}
+            {% if app.user != user %}
+                Profil de {{ user.name }} <img alt="{{ user.country.nationality }}" src="{{ user.country.urlFlag }}">
+            {% else %}
+                Mon profil
+                <button class="btn btn-warning collapse multi-collapse show float-end"
+                        data-bs-toggle="collapse"
+                        data-bs-target=".multi-collapse"
+                        aria-expanded="false"
+                        aria-controls="button-edit form-profile"
+                        id="button-edit"
+                >
+                    <i class="fa fa-pen"></i>
+                </button>
+            {% endif %}
+        {% endif %}
     </h1>
 
     <p>Temps de jeu total : {{ getUserTimeConverter(user) }}</p>
@@ -72,7 +78,7 @@
                         {
                             'game': uog.game,
                             'containerClass': 'col-lg-12',
-                            'fromUser': true
+                            'user': user
                         }
                     %}
                 </div>

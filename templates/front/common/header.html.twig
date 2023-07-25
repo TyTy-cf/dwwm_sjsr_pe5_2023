@@ -23,13 +23,40 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-2 col-sm-2 my-auto">
-                <a class="main-link" href="{{ path('app_profile_register') }}">
-                    Inscription
-                </a>
-                <a class="main-link" href="{{ path('app_admin_index') }}">
-                    Admin
-                </a>
+            <div class="col-lg-4 col-md-2 col-sm-2 my-auto d-flex justify-content-end">
+                {% if app.user %}
+                    <a class="main-link me-2"
+                       href="{{ path('app_profile_show', {'name': app.user.name}) }}"
+                       title="Mon profil"
+                    >
+                        <i class="fa fa-user-check fa-2x"></i>
+                    </a>
+                    {% if app.user.admin %}
+                        <a class="main-link me-2"
+                           href="{{ path('app_admin_index') }}"
+                           title="Mode admin">
+                            <i class="fa fa-user-secret fa-2x"></i>
+                        </a>
+                    {% endif %}
+                    <a class="main-link me-2"
+                       href="{{ path('app_logout') }}"
+                       title="Se déconnecter">
+                        <i class="fa fa-sign-out fa-2x"></i>
+                    </a>
+                {% else %}
+                    <a class="main-link me-2"
+                       href="{{ path('app_login') }}"
+                       title="Se connecter"
+                    >
+                        <i class="fa fa-user fa-2x"></i>
+                    </a>
+                    <a class="main-link me-2"
+                       href="{{ path('app_profile_register') }}"
+                       title="S'inscrire"
+                    >
+                        <i class="fa fa-sign-in fa-2x"></i>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

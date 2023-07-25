@@ -93,7 +93,7 @@ Exemple d'organisations des assets :
 - Dans le "shared/main.scss" on va lui ajouter directement bootstrap et fontawsome, afin de pouvoir l'utiliser partout :
 
 ```scss
-@import '~@bootstrap';
+@import '~bootstrap';
 
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/brands';
