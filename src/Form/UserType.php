@@ -24,6 +24,7 @@ class UserType extends AbstractType
         $builder
             ->add('password',  PasswordType::class, [
                 'label' => 'form.user.password.label',
+                'required' => $isCreation,
             ])
             ->add('nickname', null, [
                 'label' => 'form.user.nickname.label',

@@ -7,6 +7,7 @@ use App\Entity\UserOwnGame;
 use App\Form\UserType;
 use App\Repository\UserOwnGameRepository;
 use App\Repository\UserRepository;
+use App\Service\Entity\UserService;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -25,7 +27,7 @@ class UserController extends AbstractController
         private UserRepository $userRepository,
         private TranslatorInterface $translator,
         private FileUploader $fileUploader,
-        private EntityManagerInterface $em
+        private UserService $userService
     ) { }
 
     /**
@@ -62,7 +64,10 @@ class UserController extends AbstractController
                     )
                 );
             }
-            $this->userRepository->save($user, true);
+            $this->userRepository->save(
+                $this->userService->encodeUserPassword($user),
+                true
+            );
             $this->addFlash(
                 'success',
                 $this->translator->trans('pages.user.success_edit')
@@ -76,12 +81,15 @@ class UserController extends AbstractController
     }
 
     #[Route('/inscription', name: 'register')]
-    public function register(Request $request): Response {
+    public function register(Request $request, UserPasswordHasherInterface $hash): Response {
         $form = $this->createForm(UserType::class, new User());
         $form->handleRequest($request); // => traite les $_POST du form
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->userRepository->save($form->getData(), true);
+            $this->userRepository->save(
+                $this->userService->encodeUserPassword($form->getData()),
+                true
+            );
             $this->addFlash(
                 'success',
                 $this->translator->trans('pages.user.success_create')

@@ -124,3 +124,30 @@ composer require --dev hautelook/alice-bundle
 ```
 composer require knplabs/knp-paginator-bundle
 ```
+
+
+### 4. Configuration Symfony
+
+
+Assurez-vous bien que dans le "config/services.yaml", la ligne suivante existe :
+
+```yaml
+App\Controller\:
+    resource: '../src/Controller/'
+    tags: ['controller.service_arguments']
+```
+
+
+Puis dans le dossier "config/routes" ajouter un fichier de nom : "annotations.yaml" avec ce contenu :
+
+```yaml
+controllers:
+  resource: ../../src/Controller/
+  type: annotation
+
+kernel:
+  resource: ../../src/Kernel.php
+  type: annotation
+```
+
+

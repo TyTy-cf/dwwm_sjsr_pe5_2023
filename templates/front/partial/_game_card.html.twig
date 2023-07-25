@@ -13,8 +13,16 @@
         <div>
             <p class="card-game-name">{{ game.name }}</p>
         </div>
-        <div>
-            {{ game.price }}€
-        </div>
+        {% set displayPrice = true %}
+        {% if fromUser is defined %}
+            {% if app.user == user %}
+                {% set displayPrice = false %}
+            {% endif %}
+        {% endif %}
+        {% if displayPrice %}
+            <div>
+                {{ game.price }}€
+            </div>
+        {% endif %}
     </div>
 </div>
