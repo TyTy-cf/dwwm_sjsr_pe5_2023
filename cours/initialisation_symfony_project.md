@@ -57,6 +57,12 @@ yarn add @fortawesome/fontawesome-free
 ```
 
 
+- Ajout de "popper.js" (nécessaire pour Bootstrap) :
+```
+yarn add @popperjs/core
+```
+
+
 ### 2. Configuration du Webpack :
 
 
@@ -150,4 +156,5 @@ kernel:
   type: annotation
 ```
 
+Penser bien à ajouter le "tsconfig.json" à la racine du projet (copiez le depuis mon projet !)
 
