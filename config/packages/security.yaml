@@ -22,6 +22,14 @@ security:
         username_path: email
         password_path: password
 
+    main:
+      lazy: true
+      provider: app_user_provider
+      custom_authenticator: App\Security\UserAuthenticator
+      logout:
+        path: app_logout
+        target: /
+
     api:
       pattern: ^/api
       stateless: true
@@ -32,10 +40,9 @@ security:
   access_control:
     - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/docs,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#    - { path: ^/login,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/user,  roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
     - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/admin,     roles: ROLE_ADMIN }
 #    - { path: ^/api/nft,   roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
-#    - { path: ^/api/user,  roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
-#    - { path: ^/admin,     roles: IS_AUTHENTICATED_FULLY }
 
 

@@ -1,0 +1,19 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+    Vous n'avez pas accès à cette page...
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="my-5">Vous vous êtes perdu en chemin</h1>
+
+    <div>
+        Vous n'avez pas les droits nécessaires pour accéder à cette page :(
+    </div>
+
+    <a href="{{ path('app_home') }}" class="main-link my-5">
+        Retourner sur la page d'accueil
+    </a>
+
+{% endblock %}

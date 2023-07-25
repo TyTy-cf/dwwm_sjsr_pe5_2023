@@ -53,14 +53,9 @@ yarn add bootstrap
 
 - Ajout de Fontawsome :
 ```
-yarn add font-awesome
+yarn add @fortawesome/fontawesome-free
 ```
 
-
-- Ajout de Fontawsome :
-```
-yarn add font-awesome
-```
 
 ### 2. Configuration du Webpack :
 

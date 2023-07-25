@@ -1,3 +1,5 @@
+parameters:
+  hash: '$2y$13$Q8nL8tAuXweQQNCuBgqPr.m50T8WB.qZgfFdL2iCUjT3BZInrbCb' #12345
 
 App\Entity\Country:
   country_0:
@@ -81,9 +83,16 @@ App\Entity\User:
     wallet: <numberBetween(0, 200)>
     createdAt: <dateTimeBetween('2015-01-01', NOW)>
     country: '@country_<numberBetween(0, 11)>'
-#    phone_number: <phoneNumber()>
-    #        password is : testtest
-    password: "\\$2y\\$13\\$IxLbNOJZ2MbYHehPhynFwOun0bQ9lGy6PqXzsv/yJ0RZGW2gElBW6"
+    password: <{hash}>
+  user_1801:
+    name (unique): ktourret
+    email (unique): kevin@drosalys.fr
+    nickname: kevin_t
+    wallet: 5000000
+    createdAt: NOW
+    country: '@country_0'
+    roles: "[ROLE_ADMIN]"
+    password: <{hash}>
 
 App\Entity\Category:
   category_0:

@@ -57,6 +57,12 @@ symfony console make:migration
 symfony console make:user
 ```
 
+
+- Création d'un système d'authentification (nécessite un make:user avant) :
+```
+symfony console make:auth
+```
+
 ### 3. Recap des commandes "utilitaires"
 
 
