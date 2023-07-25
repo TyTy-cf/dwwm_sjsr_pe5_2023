@@ -6,9 +6,15 @@
         </a>
     {% endif %}
     <div>
+        {% set nbEmptyStar = 5 - review.rating %}
         {% if review.rating > 0 %}
             {% for i in 1..review.rating %}
                 <i class="fas fa-star icon-yellow"></i>
+            {% endfor %}
+        {% endif %}
+        {% if nbEmptyStar > 0 %}
+            {% for i in 1..nbEmptyStar %}
+                <i class="fas fa-star"></i>
             {% endfor %}
         {% endif %}
     </div>

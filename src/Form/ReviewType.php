@@ -21,7 +21,7 @@ class ReviewType extends AbstractType
             ->add('rating', IntegerType::class, [
                 'label' => 'Note',
                 'attr' => [
-                    'min' => 1,
+                    'min' => 0,
                     'max' => 5,
                 ]
             ])

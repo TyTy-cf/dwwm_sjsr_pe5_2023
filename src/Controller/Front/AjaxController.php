@@ -20,15 +20,19 @@ class AjaxController extends AbstractController
         GameRepository $gameRepository,
         string $searched
     ): JsonResponse {
-        return new JsonResponse([
-            'html' => $this->render('front/partial/_search_bar_content.html.twig', [
+
+        dump(new JsonResponse([
+            'html' => $this->renderView('front/partial/_search_bar_content.html.twig', [
                 'games' => $gameRepository->findByApproxSearch($searched),
-                'users' => '',
-                'categories' => '',
+            ])
+        ]));
+
+        return new JsonResponse([
+            'html' => $this->renderView('front/partial/_search_bar_content.html.twig', [
+                'games' => $gameRepository->findByApproxSearch($searched),
             ])
         ]);
     }
-
 
     #[Route('/add-game-to-cart/{id}', name: 'add_game_to_cart')]
     public function addGameToCart(
