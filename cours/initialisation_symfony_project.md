@@ -139,6 +139,12 @@ composer require knplabs/knp-paginator-bundle
 ```
 
 
+- Ajout des bibliothèques permettant d'effectuer des tests dans Symfony :
+```
+composer require --dev symfony/test-pack
+```
+
+
 ### 4. Configuration Symfony
 
 

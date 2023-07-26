@@ -6,74 +6,50 @@ App\Entity\Country:
     name: 'France'
     nationality: 'Français'
     code: 'fr'
-    urlFlag: 'https://flagcdn.com/32x24/fr.png'
-    slug: "francais"
   country_1:
     name: 'Royaume-Uni'
     nationality: 'Anglais'
     code: 'gb'
-    urlFlag: 'https://flagcdn.com/32x24/gb.png'
-    slug: "anglais"
   country_2:
     name: 'Russie'
     nationality: 'Russe'
     code: 'ru'
-    urlFlag: 'https://flagcdn.com/32x24/ru.png'
-    slug: "russe"
   country_3:
     name: 'Espagne'
     nationality: 'Espagnol'
     code: 'es'
-    urlFlag: 'https://flagcdn.com/32x24/es.png'
-    slug: "espagnol"
   country_4:
     name: 'Italie'
     nationality: 'Italien'
     code: 'it'
-    urlFlag: 'https://flagcdn.com/32x24/it.png'
-    slug: "italien"
   country_5:
     name: 'Portugal'
     nationality: 'Portugais'
     code: 'pt'
-    urlFlag: 'https://flagcdn.com/32x24/pt.png'
-    slug: "portugais"
   country_6:
     name: 'Chine'
     nationality: 'Chinois'
     code: 'cn'
-    urlFlag: 'https://flagcdn.com/32x24/cn.png'
-    slug: "chinois"
   country_7:
     name: 'Japon'
     nationality: 'Japonais'
     code: 'jp'
-    urlFlag: 'https://flagcdn.com/32x24/jp.png'
-    slug: "japonais"
   country_8:
     name: 'Pologne'
     nationality: 'Polonais'
     code: 'pl'
-    urlFlag: 'https://flagcdn.com/32x24/pl.png'
-    slug: "polonais"
   country_9:
     name: 'Etats-Unis'
     nationality: 'Américain'
     code: 'us'
-    urlFlag: 'https://flagcdn.com/32x24/us.png'
-    slug: "americain"
   country_10:
     name: 'Corée du sud'
     nationality: 'Coréen'
     code: 'kr'
-    urlFlag: 'https://flagcdn.com/32x24/kr.png'
-    slug: "coréen"
   country_11:
     name: 'Nouvelle Zélande'
     nationality: 'Néo zélandais'
     code: 'nz'
-    urlFlag: 'https://flagcdn.com/32x24/nz.png'
-    slug: "néo-zélandais"
 
 App\Entity\User:
   user_{0..1799}:
@@ -89,7 +65,7 @@ App\Entity\User:
     email (unique): kevin@drosalys.fr
     nickname: kevin_t
     wallet: 5000000
-    createdAt: NOW
+    createdAt: <date_create('now')>
     country: '@country_0'
     roles: "[ROLE_ADMIN]"
     password: <{hash}>
@@ -97,40 +73,28 @@ App\Entity\User:
 App\Entity\Category:
   category_0:
     name: "Stratégie"
-    slug: "strategie"
   category_1:
     name: "Simulation"
-    slug: "simulation"
   category_2:
     name: "FPS"
-    slug: "fps"
   category_3:
     name: "MMO"
-    slug: "mmo"
   category_4:
     name: "RPG"
-    slug: "rpg"
   category_5:
     name: "MOBA"
-    slug: "moba"
   category_6:
     name: "Monde ouvert"
-    slug: "monde-ouvert"
   category_7:
     name: "Battle Royale"
-    slug: "battle-royale"
   category_8:
     name: "Action"
-    slug: "action"
   category_9:
     name: "Aventure"
-    slug: "aventure"
   category_10:
     name: "Hack 'n' Slash"
-    slug: "hack--n--slash"
   category_11:
     name: "Cartes"
-    slug: "cartes"
 
 App\Entity\Publisher:
   publisher_0:
@@ -220,7 +184,7 @@ App\Entity\Publisher:
     createdAt: <dateTimeBetween('1979-05-30', '1979-05-30')>
   publisher_17:
     name: "Grinding Gear Games"
-    website: "http://www.grindinggear.com/"
+    website: "https://www.grindinggear.com/"
     country: '@country_11'
     createdAt: <dateTimeBetween('2006-11-01', '2006-11-01')>
   publisher_18:
@@ -237,6 +201,7 @@ App\Entity\Game:
     categories: ['@category_5']
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
+    publisher : '@publisher_1'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/928-1.jpg'
   games_1:
     name: 'World of Warcraft'
@@ -245,6 +210,7 @@ App\Entity\Game:
     categories: '@category_{3, 4}'
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
+    publisher : '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/149-1.jpg'
   games_2:
     name: 'Overwatch'
@@ -253,6 +219,7 @@ App\Entity\Game:
     categories: ['@category_2']
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
+    publisher : '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/32185-1.jpg'
   games_3:
     name: 'Starcraft'
@@ -261,6 +228,7 @@ App\Entity\Game:
     categories: ['@category_0']
     countries: '@country_{0, 1, 2, 3, 4, 5, 6, 7}'
     description : '<paragraph(8)>'
+    publisher : '@publisher_0'
     thumbnail_cover: 'https://cdn.thegamesdb.net/images/original/boxart/front/153-1.jpg'
   games_4:
     name: 'Civilization VI'
@@ -599,7 +567,7 @@ App\Entity\Review:
     game: '@games_0'
     upVote: <numberBetween(0, 20)>
     downVote: <numberBetween(0, 100)>
-    rating: <numberBetween(0, 1.9)>
+    rating: <numberBetween(0, 2)>
   review_{151..8999}:
     content: <paragraph(4)>
     user: '@user_<numberBetween(0, 1790)>'

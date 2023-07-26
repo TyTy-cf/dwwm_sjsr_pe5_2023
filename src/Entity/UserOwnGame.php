@@ -6,7 +6,6 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Api\UserOwnGame\PostAction;
 use App\Repository\UserOwnGameRepository;
 use Doctrine\DBAL\Types\Types;
@@ -99,12 +98,12 @@ class UserOwnGame
         return $this;
     }
 
-    public function getUser(): ?UserTest
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?UserTest $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

@@ -27,6 +27,7 @@ final class Version20230627123223 extends AbstractMigration
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649F92F3E70 FOREIGN KEY (country_id) REFERENCES country (id)');
         $this->addSql('ALTER TABLE user_own_game ADD CONSTRAINT FK_2F79BF7BE48FD905 FOREIGN KEY (game_id) REFERENCES game (id)');
         $this->addSql('ALTER TABLE user_own_game ADD CONSTRAINT FK_2F79BF7BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, image VARCHAR(255) DEFAULT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
@@ -39,5 +40,6 @@ final class Version20230627123223 extends AbstractMigration
         $this->addSql('DROP TABLE game');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE user_own_game');
+        $this->addSql('DROP TABLE category');
     }
 }

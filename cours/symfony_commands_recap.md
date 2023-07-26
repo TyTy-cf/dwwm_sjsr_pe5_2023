@@ -63,6 +63,12 @@ symfony console make:user
 symfony console make:auth
 ```
 
+
+- Créer une classe de test
+```
+symfony console make:test
+```
+
 ### 3. Recap des commandes "utilitaires"
 
 

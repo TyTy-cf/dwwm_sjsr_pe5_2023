@@ -52,6 +52,7 @@
     },
     "require-dev": {
         "hautelook/alice-bundle": "^2.10",
+        "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.4",
         "symfony/css-selector": "^5.4",
         "symfony/debug-bundle": "^5.4",
