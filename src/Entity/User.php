@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\User\GetUsernameController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,11 +35,16 @@ use Symfony\Component\Validator\Constraints as Assert;
         'get' => [
             'normalization_context' => [
                 'groups' => 'user:item'
-            ]
+            ],
         ],
         'put',
+        'app_user_by_name' => [
+            'method' => 'get',
+            'path' => 'users/{name}',
+            'controller' => GetUsernameController::class
+        ],
     ],
-    paginationItemsPerPage: 10
+    paginationItemsPerPage: 10,
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [
@@ -338,6 +344,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $minutes = ($totalGameTime % 60);
         if ($minutes < 10) {
             $minutes = '0' . $minutes;
+        }
+        if ($hours < 10) {
+            $hours = '0' . $hours;
         }
         return $hours. 'h' . $minutes;
     }

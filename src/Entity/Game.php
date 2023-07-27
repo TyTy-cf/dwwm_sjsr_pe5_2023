@@ -22,7 +22,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
             ]
         ],
     ],
-    itemOperations: ['get'],
+    itemOperations: [
+        'get'
+    ],
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [

@@ -40,5 +40,11 @@ services:
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
 
+    acme_api.event.jwt_created_listener:
+        class: App\Listener\JWT\JWTTokenListener
+#        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
