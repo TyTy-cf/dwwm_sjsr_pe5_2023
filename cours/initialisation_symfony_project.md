@@ -63,6 +63,12 @@ yarn add @popperjs/core
 ```
 
 
+- Ajout du "file-loader" pour copier des fichiers dans le dossier "public" :
+```
+yarn add file-loader
+```
+
+
 ### 2. Configuration du Webpack :
 
 
@@ -171,3 +177,69 @@ kernel:
 
 Penser bien à ajouter le "tsconfig.json" à la racine du projet (copiez le depuis mon projet !)
 
+
+### 5. CKEditor
+
+
+
+
+- Ajout de CKEditor (éditeur WYSIWYG) :
+```
+symfony composer require friendsofsymfony/ckeditor-bundle
+```
+
+- Toujours pour CKEditor :
+
+(même si vous avez passer les commandes précédentes !)
+
+```
+symfony console ckeditor:install
+```
+
+```
+symfony console assets:install public
+```
+
+
+- Ajout de CKEditor (éditeur WYSIWYG) mais les assests JS :
+```
+yarn add ckeditor4
+```
+
+
+- Mettre à jour le "webpack.config.js" pour qu'il récupère les "assets" de CKEditor depuis le node_modules dans le dossier "public" :
+  (Nécessite le "file-loader" dans Yarn)
+
+```js
+.copyFiles([
+{
+    from: './node_modules/ckeditor4/',
+    to: 'ckeditor/[path][name].[ext]',
+    pattern: /\.(js|css)$/,
+    includeSubdirectories: false
+},
+{
+    from: './node_modules/ckeditor4/adapters',
+    to: 'ckeditor/adapters/[path][name].[ext]'
+},
+{
+    from: './node_modules/ckeditor4/lang',
+    to: 'ckeditor/lang/[path][name].[ext]'
+},
+{
+    from: './node_modules/ckeditor4/plugins',
+    to: 'ckeditor/plugins/[path][name].[ext]'
+},
+{
+    from: './node_modules/ckeditor4/skins',
+    to: 'ckeditor/skins/[path][name].[ext]'
+},
+{
+    from: './node_modules/ckeditor4/vendor',
+    to: 'ckeditor/vendor/[path][name].[ext]'
+}
+])
+```
+
+
+Dans les FormType où vous souhaitez l'utiliser, il suffit d'utiliser la classe : "CKEditorType"

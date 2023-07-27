@@ -9,6 +9,7 @@ use App\Entity\Publisher;
 use App\Repository\CountryRepository;
 use App\Repository\PublisherRepository;
 use Doctrine\ORM\EntityRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -31,7 +32,7 @@ class GameType extends AbstractType
             ->add('price',null, [
                 'label' => 'form.game.price.label',
             ])
-            ->add('description',null, [
+            ->add('description',CKEditorType::class, [
                 'label' => 'form.game.description.label',
             ])
             ->add('publishedAt',DateType::class, [
