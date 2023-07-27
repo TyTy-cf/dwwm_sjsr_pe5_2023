@@ -1,11 +1,14 @@
 
-function initButtonAddToCart() {
+interface AjaxResponse {
+    nbCartElement: number;
+}
+
+function initButtonEmptyCart() {
     const buttonAddToCart: HTMLButtonElement =
-        document.querySelector('[data-buy-game]');
+        document.querySelector('[data-empty-cart]');
     if (buttonAddToCart) {
         buttonAddToCart.addEventListener('click', () => {
-            const gameId: string = buttonAddToCart.getAttribute('data-buy-game');
-            fetch('/ajax/add-game-to-cart/' + gameId, {method: 'GET'})
+            fetch('/ajax/empty-cart', {method: 'GET'})
             .then((response: Response) => {
                 return response.json();
             })
@@ -14,11 +17,12 @@ function initButtonAddToCart() {
                 if (nbElementCart) {
                     nbElementCart.innerHTML = json.nbCartElement.toString();
                 }
+                document.location.href = '/panier';
             });
         });
     }
 }
 
 window.addEventListener('load', () => {
-    initButtonAddToCart();
+    initButtonEmptyCart();
 });

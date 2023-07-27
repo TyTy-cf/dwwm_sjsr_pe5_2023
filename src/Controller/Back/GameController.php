@@ -5,7 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
-use App\Service\TextService;
+use App\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +26,7 @@ class GameController extends AbstractController
     public function new(
         Request $request,
         GameRepository $gameRepository,
-        TextService $textService
+        SlugService $textService
     ): Response
     {
         $game = new Game();
@@ -58,7 +58,7 @@ class GameController extends AbstractController
         Request $request,
         Game $game,
         GameRepository $gameRepository,
-        TextService $textService
+        SlugService $textService
     ): Response
     {
         $form = $this->createForm(GameType::class, $game);

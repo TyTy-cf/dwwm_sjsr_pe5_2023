@@ -45,7 +45,7 @@ class RegionCommand extends Command
 //        }
 
         $response = $this->httpClientService
-            ->getFrom('https://geo.api.gouv.fr/regions/');
+            ->get('https://geo.api.gouv.fr/regions/');
 
         $arrayRegions = json_decode($response->getContent(), true);
 

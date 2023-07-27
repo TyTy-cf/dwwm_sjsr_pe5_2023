@@ -22,7 +22,7 @@ class HttpClientService
      * @return ResponseInterface
      * @throws TransportExceptionInterface
      */
-    public function getFrom(string $url): ResponseInterface
+    public function get(string $url): ResponseInterface
     {
         $client = HttpClient::create();
         $response = $client->request('GET', $url);

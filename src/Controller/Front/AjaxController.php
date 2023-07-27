@@ -47,4 +47,21 @@ class AjaxController extends AbstractController
         return new JsonResponse(['nbCartElement' => sizeof($currentIds)]);
     }
 
+    #[Route('/empty-cart', name: 'empty_cart')]
+    public function emptyCart(SessionInterface $session): JsonResponse {
+        if ($session->has(self::CART_ITEMS)) {
+            $session->remove(self::CART_ITEMS);
+        }
+        return new JsonResponse(['nbCartElement' => 0]);
+    }
+
+    #[Route('/cart-size', name: 'cart_size')]
+    public function cartSize(SessionInterface $session): JsonResponse {
+        if ($session->has(self::CART_ITEMS)) {
+            $games = $session->get(self::CART_ITEMS);
+            return new JsonResponse(['nbCartElement' => sizeof($games)]);
+        }
+        return new JsonResponse(['nbCartElement' => 0]);
+    }
+
 }

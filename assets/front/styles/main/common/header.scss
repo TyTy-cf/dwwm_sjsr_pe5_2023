@@ -3,6 +3,22 @@ header {
   background-color: $footer-background-color;
   min-height: 120px;
 
+  .cart-container {
+    position: relative;
+
+    .cart-elements {
+      top: -30%;
+      left: -30%;
+      position: absolute;
+      border: 0.5px solide $main-color;
+      border-radius: 0.8em;
+      background: $fire-gradient;
+      padding: 0.2em 0.6em;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+
   .main-container {
     background: $fire-gradient;
     border-radius: 3em;

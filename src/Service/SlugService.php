@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class TextService
+class SlugService
 {
 
     public function slugify(string $text): string

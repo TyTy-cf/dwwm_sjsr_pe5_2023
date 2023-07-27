@@ -7,7 +7,7 @@ use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Service\Entity\CategoryService;
 use App\Service\FileUploader;
-use App\Service\TextService;
+use App\Service\SlugService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;

@@ -88,3 +88,11 @@ symfony console d:m:m
 ```
 symfony console hautelook:fixtures:load --purge-with-truncate -n
 ```
+
+
+- Encoder un password :
+```
+symfony console security:hash-password PASSWORD
+```
+
+
