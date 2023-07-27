@@ -11,6 +11,13 @@ entity:
     nickname:
       not_blank: "Le pseudo doit être renseigné"
 
+  publisher:
+    name:
+      not_blank: "Le nom doit être renseigné"
+    website:
+      not_black: "Le site web doit être renseigné"
+      url: "Le site web doit être url valide"
+
 form:
   user:
     profile_image:

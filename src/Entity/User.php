@@ -6,7 +6,6 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Controller\Api\User\GetUsernameController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,17 +37,12 @@ use Symfony\Component\Validator\Constraints as Assert;
             ],
         ],
         'put',
-        'app_user_by_name' => [
-            'method' => 'get',
-            'path' => 'users/{name}',
-            'controller' => GetUsernameController::class
-        ],
     ],
     paginationItemsPerPage: 10,
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [
-        'name' => 'partial',
+        'name' => 'exact',
         'email' => 'partial',
         'nickname' => 'partial',
         'createdAt' => 'partial',

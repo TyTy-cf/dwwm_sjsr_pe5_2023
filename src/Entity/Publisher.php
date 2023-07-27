@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PublisherRepository::class)]
 #[ApiResource(
@@ -40,11 +41,14 @@ class Publisher implements SlugInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['publisher:post', 'publisher:item', 'publisher:list'])]
+    #[Assert\NotBlank(message: 'entity.publisher.name.not_blank')]
+    #[Groups(['publisher:post', 'publisher:item', 'publisher:list', 'games:item'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['publisher:post', 'publisher:item', 'publisher:list'])]
+    #[Assert\NotBlank(message: 'entity.publisher.website.not_blank')]
+    #[Assert\Url(message: 'entity.publisher.website.url')]
+    #[Groups(['publisher:post', 'publisher:item', 'publisher:list', 'games:item'])]
     private ?string $website = null;
 
     #[ORM\ManyToOne]
@@ -59,7 +63,7 @@ class Publisher implements SlugInterface
     private Collection $games;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['publisher:item', 'publisher:list'])]
+    #[Groups(['publisher:item', 'publisher:list', 'games:item'])]
     private ?string $slug = null;
 
     public function __construct()

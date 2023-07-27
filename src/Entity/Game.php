@@ -23,7 +23,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
     ],
     itemOperations: [
-        'get'
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'games:item'
+            ]
+        ],
     ],
 )]
 #[ApiFilter(
@@ -51,25 +55,27 @@ class Game implements SlugInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['games:list', 'userOwnGames:list', 'user:item', 'review:list', 'review:item'])]
+    #[Groups(['games:list', 'games:item', 'userOwnGames:list', 'user:item', 'review:list', 'review:item'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['games:list', 'review:list', 'review:item'])]
+    #[Groups(['games:list', 'games:item', 'review:list', 'review:item'])]
     private ?float $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['games:item'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['games:item'])]
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['games:list', 'user:item', 'review:list', 'review:item'])]
+    #[Groups(['games:list', 'games:item', 'user:item', 'review:list', 'review:item'])]
     private ?string $thumbnailCover = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['games:list', 'userOwnGames:list', 'user:item', 'userOwnGames:post', 'review:list', 'review:item', 'review:post'])]
+    #[Groups(['games:list', 'games:item', 'userOwnGames:list', 'user:item', 'userOwnGames:post', 'review:list', 'review:item', 'review:post'])]
     private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'game', targetEntity: Review::class)]
@@ -79,6 +85,7 @@ class Game implements SlugInterface
     private Collection $categories;
 
     #[ORM\ManyToOne(inversedBy: 'games')]
+    #[Groups(['games:item'])]
     private ?Publisher $publisher = null;
 
     #[ORM\ManyToMany(targetEntity: Country::class)]

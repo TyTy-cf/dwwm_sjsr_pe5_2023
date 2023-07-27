@@ -35,7 +35,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 )]
 #[ApiFilter(
     SearchFilter::class, properties: [
-        'game.name' => 'partial'
+        'game.slug' => 'exact'
     ]
 )]
 #[ApiFilter(
