@@ -1,0 +1,29 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+
+    <h1>Mon panier</h1>
+
+    <table class="table table-striped table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Jeu</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>
+                        <img class="col-1 me-2" src="{{ game.thumbnailCover }}">
+                        {{ game.name }}
+                    </td>
+                    <td>
+                        {{ game.price }}€
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

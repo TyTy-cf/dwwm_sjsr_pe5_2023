@@ -35,10 +35,7 @@ class AjaxController extends AbstractController
     }
 
     #[Route('/add-game-to-cart/{id}', name: 'add_game_to_cart')]
-    public function addGameToCart(
-        SessionInterface $session,
-        string $id
-    ): JsonResponse {
+    public function addGameToCart(string $id, SessionInterface $session): JsonResponse {
         $currentIds = [];
         if ($session->has(self::CART_ITEMS)) {
             $currentIds = $session->get(self::CART_ITEMS);
@@ -46,9 +43,8 @@ class AjaxController extends AbstractController
         if (false === in_array($id, $currentIds)) {
             $currentIds[] = $id;
             $session->set(self::CART_ITEMS, $currentIds);
-            return new JsonResponse(['added' => true]);
         }
-        return new JsonResponse(['added' => false]);
+        return new JsonResponse(['nbCartElement' => sizeof($currentIds)]);
     }
 
 }

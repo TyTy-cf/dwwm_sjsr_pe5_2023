@@ -24,6 +24,12 @@
             </div>
 
             <div class="col-lg-4 col-md-2 col-sm-2 my-auto d-flex justify-content-end">
+                <a class="main-link me-2"
+                   href="{{ path('app_cart_index') }}"
+                   title="Voir mon panier"
+                >
+                    <i class="fa fa-cart-shopping fa-2x"></i>
+                </a>
                 {% if app.user %}
                     <a class="main-link me-2"
                        href="{{ path('app_profile_show', {'name': app.user.name}) }}"
